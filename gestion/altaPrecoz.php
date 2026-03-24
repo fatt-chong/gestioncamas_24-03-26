@@ -72,7 +72,7 @@ if ($cualtab == '')
 	<?
 	include "../funciones/funciones.php";	
 
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');
  
 	$fecha_hoy = date('Y-m-d');

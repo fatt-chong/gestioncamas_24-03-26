@@ -10,7 +10,7 @@ if ( $_SESSION['MM_Username'] == null ) {
 }
 include "../funciones/epicrisis_funciones.php";
 if($medicoGC == '172 -   - SIN ASIGNAR -'){ $medicoGC = '';	}
-$dbhost = '10.6.21.12';
+$dbhost = '10.6.21.29';
 mysql_connect ($dbhost,'gestioncamas','123gestioncamas');
 mysql_select_db('paciente') or die('Cannot select database');
 

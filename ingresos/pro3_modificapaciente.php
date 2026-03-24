@@ -47,7 +47,7 @@ if ($edad_paciente < 0) {$edad_paciente = 0;}
 	fono2_paciente  = '$fono2_paciente', 
 	fono3_paciente  = '$fono3_paciente'
 	WHERE id = $id_cama ";
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');
 
 	$resultado = mysql_query( $sql );

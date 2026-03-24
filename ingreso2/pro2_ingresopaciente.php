@@ -81,7 +81,7 @@ if ($edad_paciente < 0) {$edad_paciente = 0;}
 
 $fecha_hospitalizacion = cambiarFormatoFecha2($fecha_ingreso);
 
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 $sql = "SELECT * FROM sscc where id = '".$servicio."'";
 mysql_select_db('camas') or die('Cannot select database');
 

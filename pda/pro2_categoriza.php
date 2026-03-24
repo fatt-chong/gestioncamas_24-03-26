@@ -17,7 +17,7 @@ $fecha_hoy = date('d-m-Y');
 $fecha_categorizacion = cambiarFormatoFecha($fecha_hoy);
 
 $sql = "SELECT * FROM categorizacion where cod_servicio = '".$cod_servicio."' and sala = '".$sala."' and cama = '".$cama."' and fecha = '".$fecha_categorizacion."'";
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 $query = mysql_query($sql) or die(mysql_error());
 
@@ -29,7 +29,7 @@ if ($categoriza)
 
 	$id_categoriza = $categoriza['id'];
 
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');
 
 	$resultado1 = mysql_query( "UPDATE categorizacion SET
@@ -60,7 +60,7 @@ if ($categoriza)
 else
 {
 
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');
 
 	$resultado1 = mysql_query( "INSERT INTO categorizacion
@@ -125,7 +125,7 @@ else
 }
 
 
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');
 
 	$resultado2 = mysql_query( "UPDATE camas SET

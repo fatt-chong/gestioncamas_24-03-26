@@ -150,7 +150,7 @@ $fecha_categoriza = cambiarFormatoFecha($fecha_hoy);
 
 $cod_usuario = 1;
 $usuario = $_SESSION['MM_Username'];
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 
 $sqlLista = "SELECT *

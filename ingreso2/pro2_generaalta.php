@@ -90,7 +90,7 @@ if ($cod_destino > 100)
     $desc_servicio_hasta = 'Externo';
 }
 	
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 $query = mysql_query("SELECT * FROM sscc where id = $cod_destino") or die(mysql_error());
 $query_servicio = mysql_fetch_array($query);

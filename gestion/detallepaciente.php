@@ -29,7 +29,7 @@ echo $es_ap;
 	if ($es_ap == 1) { $sql = "SELECT * FROM altaprecoz where id = '".$id_cama."'"; } else
 	{ $sql = "SELECT * FROM camas where id = '".$id_cama."'"; }
 	
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');
 	$query = mysql_query($sql) or die(mysql_error());
 
@@ -213,7 +213,7 @@ echo $es_ap;
 					$rut_paciente = $paciente['rut_paciente'];
 					$sql = "SELECT * FROM hospitalizaciones where id_paciente = '".$id_paciente."'";
 					//$sql = "SELECT * FROM hospitalizaciones where rut_paciente = '".$rut_paciente."'";
-					mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+					mysql_connect ('10.6.21.29','usuario','hospital');
 					mysql_select_db('camas') or die('Cannot select database');
 					$query2 = mysql_query($sql) or die(mysql_error());
 

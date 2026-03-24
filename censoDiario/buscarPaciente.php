@@ -103,7 +103,7 @@ require_once('include/funciones/funciones.php');
 					$sql = "SELECT * FROM paciente where nroficha = ".$nroficha. " LIMIT $desde, $largo";
 				}
 				
-            	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+            	mysql_connect ('10.6.21.29','usuario','hospital');
             	mysql_select_db('paciente') or die('Cannot select database');
             	$query = mysql_query($sql) or die(mysql_error());
             	$querytot = mysql_query($sqltot) or die(mysql_error());

@@ -151,7 +151,7 @@ $usuario = 'Usuario de Prueba';
 
 $sql = "SELECT * FROM categorizacion where cod_servicio = '".$cod_servicio."' and sala = '".$sala."' and cama = '".$cama."' and fecha = '".$fecha_categoriza."'";
 
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 $query = mysql_query($sql) or die(mysql_error());
 

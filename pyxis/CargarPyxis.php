@@ -78,7 +78,7 @@
 					$tipoegreso = 'U';
 										
 					// Recuperamos el RAU asociado a la Cuenta Corriente del Paciente
-					$rau = mysql_pconnect('10.6.21.12', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
+					$rau = mysql_pconnect('10.6.21.29', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
 					mysql_select_db('rau', $rau);
 					$query_rs_rau = sprintf("SELECT rau.idrau FROM rau WHERE rau.idctacte = %s", GetSQLValueString($ctacte, "int"));
 					$rs_rau = mysql_query($query_rs_rau, $rau) or die(mysql_error());
@@ -98,7 +98,7 @@
 						$bodega = 'P003';
 					}
 										
-					$farmacos = mysql_pconnect('10.6.21.12', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
+					$farmacos = mysql_pconnect('10.6.21.29', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
 					mysql_select_db('farmacos', $farmacos);
 					$query_rs_farmacos = sprintf("SELECT Max(egreId) as id FROM egresos WHERE tipoEgreId = 'C'");
 					$rs_farmacos = mysql_query($query_rs_farmacos, $farmacos) or die(mysql_error());
@@ -110,7 +110,7 @@
 					
 
 					// Extraemos el nombre del producto utilizado mas adelante para insertalo en egredetalle
-					$aba = mysql_pconnect('10.6.21.12', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
+					$aba = mysql_pconnect('10.6.21.29', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
 					mysql_select_db('aba', $aba);
 				
 					$query_rs_producto = sprintf("SELECT producto.produNombre, producto.umediCod, producto.produprecio FROM producto WHERE producto.produCodInt = %s",
@@ -127,7 +127,7 @@
 					if ($tipo == 'C') {
 									
 						// Revisamos si existe Cabecera de la Receta para el RAU en proceso
-						$farmacos = mysql_pconnect('10.6.21.12', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
+						$farmacos = mysql_pconnect('10.6.21.29', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
 						mysql_select_db('farmacos', $farmacos);
 						
 						$query_rs_farmaco = sprintf("SELECT egresos.egreId FROM egresos WHERE egresos.egreId = %s AND egresos.tipoEgreId = %s",
@@ -159,7 +159,7 @@
 						} 
 				
 						// Insertamos el farmaco en egresodetalle
-						$egresodetalle = mysql_pconnect('10.6.21.12', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
+						$egresodetalle = mysql_pconnect('10.6.21.29', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
 						mysql_select_db('farmacos', $egresodetalle);
 						
 						
@@ -234,7 +234,7 @@
 									
 					} else {  // No es Cargo, es Devolución, en ese caso se debe eliminar el farmaco de la receta del paciente
 				
-						$delete = mysql_pconnect('10.6.21.12', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
+						$delete = mysql_pconnect('10.6.21.29', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
 						mysql_select_db('farmacos', $delete);				
 						$query_rs_delete_farmaco = sprintf("delete from egresosdetalle where egresosdetalle.egreId = %s AND egresosdetalle.tipoEgreId = %s AND egresosdetalle.produCodInt = %s",
 								 GetSQLValueString($numeroreceta, "int"),
@@ -274,7 +274,7 @@
 		$bincaNumMov = $separar[1];		
         $bincaUmediCod_ = ($bincaUmediCod_ != "") ? "'" . $bincaUmediCod_ . "'" : "UD";		
 		
-		$aba = mysql_pconnect('10.6.21.12', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
+		$aba = mysql_pconnect('10.6.21.29', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
 		mysql_select_db('aba', $aba);
 
 		$query_rs_bincard = sprintf("INSERT INTO bincard(bincaAnio, bincaNumMov, bincaProduCodInt, bincaUmediCod, bincaFecha, tmoviCod, bincaDocGenMovCentro, bincaDocGenMovAnio, bincaDocGenMov, bincaDocGenTipo, bincaDocAsoMovCentro, bincaDocAsoMovAnio, bincaDocAsoMov, bincaBodegCod, bincaObs, bincaVUnitario, bincaEntradas, bincaSalidas, bincaSaldos, bincaTipo, proveRUT, bincaCentrCod, bincaBodegCodOri, bincaServiCod, bincaHora, bincaUsuarCod) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
@@ -312,7 +312,7 @@
 	
 	function ObtenerCorrelativo($documCod_){
 
-		$aba = mysql_pconnect('10.6.21.12', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
+		$aba = mysql_pconnect('10.6.21.29', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
 		mysql_select_db('aba', $aba);
 		
 		//Obtener Año Activo para correlativos en ABA			
@@ -343,7 +343,7 @@
 		
 	function ActualizarStockBodega($cantidad_, $codproducto_, $bodega_, $servicio_){
 
-		$aba = mysql_pconnect('10.6.21.12', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
+		$aba = mysql_pconnect('10.6.21.29', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
 		mysql_select_db('aba', $aba);
 		
 		$query_rs_update_productobodega = sprintf("UPDATE productobodega SET produStkReal=produStkReal + %s WHERE produCodInt=%s AND bodegCod=%s AND serviCod=%s AND centrCod=103",

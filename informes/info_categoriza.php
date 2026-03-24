@@ -187,7 +187,7 @@ $fecha_hasta_proceso = cambiarFormatoFecha($fecha_hasta);
 	
 	
 		$sql = "SELECT * FROM sscc";
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('camas') or die('Cannot select database');
 		$query = mysql_query($sql) or die(mysql_error());
 		
@@ -289,7 +289,7 @@ $fecha_hasta_proceso = cambiarFormatoFecha($fecha_hasta);
 			(categorizacion.ev_1 <>  '0' OR categorizacion.ev_2 <>  '0' OR categorizacion.ev_3 <>  '0' OR categorizacion.ev_4 <>  '0' OR categorizacion.ev_5 <>  '0' OR categorizacion.ev_6 <>  '0' OR categorizacion.ev_7 <>  '0' OR categorizacion.ev_8 <>  '0' OR categorizacion.ev_9 <>  '0' OR categorizacion.ev_10 <>  '0' OR categorizacion.ev_11 <>  '0' OR categorizacion.ev_12 <>  '0' OR categorizacion.ev_13 <>  '0' OR categorizacion.ev_14 <>  '0')
 			order by sala, cama";
 		
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('camas') or die('Cannot select database');
 		$query = mysql_query($sql) or die(mysql_error());
 		
@@ -861,7 +861,7 @@ if ($flag == 1)
 			}
 		}
 
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('camas') or die('Cannot select database');
 		$query = mysql_query($sql) or die(mysql_error());
 		
@@ -1240,7 +1240,7 @@ if ($flag == 1)
 		$sql = "SELECT * FROM categorizacion where fecha BETWEEN '".$fecha_desde_proceso."' AND '".$fecha_hasta_proceso."' order by cod_servicio, fecha";
 
 
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('camas') or die('Cannot select database');
 		$query = mysql_query($sql) or die(mysql_error());
 		
@@ -1329,7 +1329,7 @@ if ($flag == 1)
 
 						$sql = "SELECT * FROM rau where fecha BETWEEN '".$fecha_desde_proceso." 00:00:00' AND '".$fecha_hasta_proceso." 23:59:59' ";
 				
-						mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+						mysql_connect ('10.6.21.29','usuario','hospital');
 						mysql_select_db('rau') or die('Cannot select database');
 						$query1 = mysql_query($sql) or die(mysql_error());
 						
@@ -1344,7 +1344,7 @@ if ($flag == 1)
 							
 							$sql = "SELECT * FROM ctacteprestacion where ctacteCod = $cta_cte and preCod = '0302047' ";
 					
-							mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+							mysql_connect ('10.6.21.29','usuario','hospital');
 							mysql_select_db('paciente') or die('Cannot select database');
 							$query2 = mysql_query($sql) or die(mysql_error());
 							
@@ -1392,7 +1392,7 @@ if ($flag == 1)
 
 						$sql = "SELECT * FROM cirugia WHERE ciruFecha BETWEEN '".$fecha_desde_proceso."' AND '".$fecha_hasta_proceso."'";
 				
-						mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+						mysql_connect ('10.6.21.29','usuario','hospital');
 						mysql_select_db('pabellon') or die('Cannot select database');
 						$query2 = mysql_query($sql) or die(mysql_error());
 						
@@ -1530,7 +1530,7 @@ if ($flag == 1)
 		$sql = "SELECT * FROM categorizacion where fecha BETWEEN '".$fecha_desde_proceso."' AND '".$fecha_hasta_proceso."' order by cod_servicio, fecha";
 
 
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('camas') or die('Cannot select database');
 		$query = mysql_query($sql) or die(mysql_error());
 		
@@ -1682,7 +1682,7 @@ if ($flag == 1)
 		$sql = "SELECT * FROM categorizacion where fecha BETWEEN '".$fecha_desde_proceso."' AND '".$fecha_hasta_proceso."' order by cod_servicio, fecha";
 
 
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('camas') or die('Cannot select database');
 		$query = mysql_query($sql) or die(mysql_error());
 		
@@ -2154,7 +2154,7 @@ if ($flag == 1)
 					camas.evaluacion_social.ED_fecha BETWEEN '".$fecha_desde_proceso."' AND '".$fecha_hasta_proceso."'";
 				
 
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('camas') or die('Cannot select database');
 		$query = mysql_query($sql) or die(mysql_error());
 		

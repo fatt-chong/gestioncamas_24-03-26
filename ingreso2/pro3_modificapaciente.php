@@ -31,7 +31,7 @@ include "../funciones/funciones.php";
 	if ($edad_paciente < 0) {$edad_paciente = 0;}
 
 
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');
 
 	$resultado = mysql_query( "UPDATE altaprecoz SET 	

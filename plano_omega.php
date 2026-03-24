@@ -118,7 +118,7 @@ while ($elemento = readdir($dir))
 				*/
 				
 				$sql = "SELECT * FROM controllaboratorio where solicitud_examen = '".$solicitud_examen."'";
-				mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+				mysql_connect ('10.6.21.29','usuario','hospital');
 				mysql_select_db('paciente') or die('Cannot select database');
 				$query = mysql_query($sql) or die(mysql_error());
 				
@@ -198,7 +198,7 @@ while ($elemento = readdir($dir))
 					(archivo_plano : ".$archivo_plano.")";
 
 
-					mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+					mysql_connect ('10.6.21.29','usuario','hospital');
 					mysql_select_db('paciente') or die('Cannot select database');
 					$resultado_p = mysql_query( "INSERT INTO errores_omega
 					( archivo_plano	) VALUES ( '$archivo_plano'	) ");
@@ -256,7 +256,7 @@ while ($elemento = readdir($dir))
 				
 				
 				$sql = "SELECT * FROM prestacioneslaboratorio where solicitud_examen = '".$solicitud_examen."' and numero_orden = '".$numero_orden."'";
-				mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+				mysql_connect ('10.6.21.29','usuario','hospital');
 				mysql_select_db('paciente') or die('Cannot select database');
 				$query = mysql_query($sql) or die(mysql_error());
 				
@@ -327,7 +327,7 @@ while ($elemento = readdir($dir))
 					(desc_tiposeccion : ".$desc_tiposeccion.")-
 					(estado_prueba : ".$estado_prueba.")";
 					
-					mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+					mysql_connect ('10.6.21.29','usuario','hospital');
 					mysql_select_db('paciente') or die('Cannot select database');
 					$resultado_p = mysql_query( "INSERT INTO errores_omega
 					( archivo_plano	) VALUES ( '$archivo_plano'	) ");
@@ -370,7 +370,7 @@ while ($elemento = readdir($dir))
 				*/
 		
 				$sql = "SELECT * FROM resultadoslaboratorio where solicitud_examen = '".$solicitud_examen."' and numero_orden = '".$numero_orden."' and numero_resultado = '".$numero_resultado."'";
-				mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+				mysql_connect ('10.6.21.29','usuario','hospital');
 				mysql_select_db('paciente') or die('Cannot select database');
 				$query = mysql_query($sql) or die(mysql_error());
 				
@@ -432,7 +432,7 @@ while ($elemento = readdir($dir))
 					(usuario_validacion : ".$usuario_validacion.")-
 					(fecha : ".$fecha.")";
 
-					mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+					mysql_connect ('10.6.21.29','usuario','hospital');
 					mysql_select_db('paciente') or die('Cannot select database');
 					$resultado_p = mysql_query( "INSERT INTO errores_omega
 					( archivo_plano	) VALUES ( '$archivo_plano'	) ");

@@ -109,7 +109,7 @@ $fecha_hasta_proceso = cambiarFormatoFecha($fecha_hasta);
 if ($d_censo_minsal == 1)
 {
 	$sql = "SELECT * FROM sscc_minsal";
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');
 	$query = mysql_query($sql) or die(mysql_error());
 	
@@ -128,7 +128,7 @@ if ($d_censo_minsal == 1)
 else
 {
 	$sql = "SELECT * FROM sscc";
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');
 	$query = mysql_query($sql) or die(mysql_error());
 	
@@ -376,7 +376,7 @@ $nro_dias_estada_benef = 0;
 		$sql = "SELECT * FROM camas where cod_servicio = '".$cod_servicio."' order by tipo_traslado";
 	}
 
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 $query = mysql_query($sql) or die(mysql_error());
 
@@ -424,7 +424,7 @@ else
 {
 	$sql = "SELECT * FROM hospitalizaciones where cod_servicio = '".$cod_servicio."' and fecha_ingreso <= '".$fecha_proceso."' and fecha_egreso >= '".$fecha_proceso."' and tipo_traslado <> 3 order by tipo_traslado";
 }
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 $query = mysql_query($sql) or die(mysql_error());
 

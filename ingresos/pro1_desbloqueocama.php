@@ -35,7 +35,7 @@ $estado = $_SESSION['MM_pro_estado'];
 
 
 $sql = "SELECT * FROM camas where id = '".$id_cama."'";
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 $query = mysql_query($sql) or die(mysql_error());
 

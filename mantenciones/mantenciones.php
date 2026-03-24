@@ -49,7 +49,7 @@ $servicios_rau = $_SESSION['serviciousuario'];
 
 if ($cod_servicio == '') { $cod_servicio = $_SESSION['MM_Servicio_activo']; } else { $_SESSION['MM_Servicio_activo'] = $cod_servicio; }
 
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 
 $query = mysql_query("SELECT * FROM sscc where id = $cod_servicio") or die(mysql_error());
@@ -92,7 +92,7 @@ $desc_servicio= $query_servicio['servicio'];
                             <select name="cod_servicio" onchange="document.frm_sscc.submit()">
                             <?php
                                 $i = 0;
-                                mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+                                mysql_connect ('10.6.21.29','usuario','hospital');
                                 mysql_select_db('camas') or die('Cannot select database');
                             
                                 for($i=0; $i<count($servicios_rau); $i++)
@@ -149,7 +149,7 @@ $desc_servicio= $query_servicio['servicio'];
 
 
 
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 
 $query = mysql_query("SELECT * FROM camas where cod_servicio = $servicio order by sala, cama") or die(mysql_error());
@@ -359,7 +359,7 @@ $query = mysql_query("SELECT * FROM camas where cod_servicio = $servicio order b
                                     <?
                                     $sql = "SELECT * FROM transito_paciente where cod_sscc_hasta = $id_rau";
                     
-                                    mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+                                    mysql_connect ('10.6.21.29','usuario','hospital');
                                     mysql_select_db('camas') or die('Cannot select database');
                                     $query = mysql_query($sql) or die(mysql_error());
             
@@ -409,7 +409,7 @@ $query = mysql_query("SELECT * FROM camas where cod_servicio = $servicio order b
                                     <?
                                     $sql = "SELECT * FROM transito_paciente where cod_sscc_desde = $id_rau";
                     
-                                    mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+                                    mysql_connect ('10.6.21.29','usuario','hospital');
                                     mysql_select_db('camas') or die('Cannot select database');
                                     $query = mysql_query($sql) or die(mysql_error());
                     

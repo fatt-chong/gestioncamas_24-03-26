@@ -133,7 +133,7 @@ $fecha_hasta_proceso = cambiarFormatoFecha($fecha_hasta);
 if ($d_censo_minsal == 1)
 {
 	$sql = "SELECT * FROM sscc_minsal";
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');
 	$query = mysql_query($sql) or die(mysql_error());
 	
@@ -152,7 +152,7 @@ if ($d_censo_minsal == 1)
 else
 {
 	$sql = "SELECT * FROM sscc";
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');
 	$query = mysql_query($sql) or die(mysql_error());
 	
@@ -414,7 +414,7 @@ else
 
 			
 			$sql = "SELECT * FROM nro_camas where tipo_servicio = $d_censo_minsal and cod_servicio = $cod_servicio order by fecha";
-			mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+			mysql_connect ('10.6.21.29','usuario','hospital');
 			mysql_select_db('camas') or die('Cannot select database');
 			$query = mysql_query($sql) or die(mysql_error());
 			
@@ -445,7 +445,7 @@ else
 			}
 
 
-			mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+			mysql_connect ('10.6.21.29','usuario','hospital');
 			mysql_select_db('camas') or die('Cannot select database');
 			$query = mysql_query($sql) or die(mysql_error());
 			
@@ -499,7 +499,7 @@ else
 //			Aqui se carga listasn de SN
 
 
-			mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+			mysql_connect ('10.6.21.29','usuario','hospital');
 			mysql_select_db('camas') or die('Cannot select database');
 			$query = mysql_query($sql_SN) or die(mysql_error());
 
@@ -568,7 +568,7 @@ else
 
 
 
-			mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+			mysql_connect ('10.6.21.29','usuario','hospital');
 			mysql_select_db('camas') or die('Cannot select database');
 			$query = mysql_query($sql) or die(mysql_error());
 
@@ -751,7 +751,7 @@ else
 
 //  Aqui va codigo SN
 
-			mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+			mysql_connect ('10.6.21.29','usuario','hospital');
 			mysql_select_db('camas') or die('Cannot select database');
 			$query = mysql_query($sql_SN) or die(mysql_error());
 
@@ -924,7 +924,7 @@ else
 			}
 
 // 			Bloqueadas SN
-			mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+			mysql_connect ('10.6.21.29','usuario','hospital');
 			mysql_select_db('camas') or die('Cannot select database');
 			$query = mysql_query($sql_bl_SN) or die(mysql_error());
 

@@ -43,7 +43,7 @@ $tipo=$_GET['tipo'];
 
 	//$_SESSION['MM_pro_id_cama'] = $id_cama;
 	
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	
 	
 	//if($PEN){
@@ -254,7 +254,7 @@ $tipo=$_GET['tipo'];
 
 				
 					$sql = "SELECT * FROM categorizacion where id_paciente = '".$id_paciente."' and fecha >= '".$hospitalizado."' order by fecha DESC";
-					mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+					mysql_connect ('10.6.21.29','usuario','hospital');
 					mysql_select_db('camas') or die('Cannot select database');
 					$query = mysql_query($sql) or die(mysql_error());
 
@@ -318,7 +318,7 @@ $tipo=$_GET['tipo'];
 					$sql = "SELECT * FROM hospitalizaciones where id_paciente = '".$id_paciente."' order by fecha_ingreso DESC";
 					
 					//$sql = "SELECT * FROM hospitalizaciones where rut_paciente = '".$rut_paciente."'";
-					mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+					mysql_connect ('10.6.21.29','usuario','hospital');
 					mysql_select_db('camas') or die('Cannot select database');
 					$query2 = mysql_query($sql) or die(mysql_error());
 

@@ -73,7 +73,7 @@ if ($doc_paciente <> "")
 		$sql = "SELECT * FROM paciente where nroficha = '".$doc_paciente."'";
 	}
 
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('paciente') or die('Cannot select database');
 	$query = mysql_query($sql) or die(mysql_error());
 	
@@ -93,7 +93,7 @@ if ($doc_paciente <> "")
 		$hospitalizado = $paciente['hospitalizado'];
 
 		$sql = "SELECT * FROM prevision where id = '".$cod_prevision."'";
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('paciente') or die('Cannot select database');
 		$query = mysql_query($sql) or die(mysql_error());
 		
@@ -102,7 +102,7 @@ if ($doc_paciente <> "")
 		$prevision = $l_prevision['prevision'];
 		
 		$sql = "SELECT * FROM comuna where id = '".$cod_comuna."'";
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('paciente') or die('Cannot select database');
 		$query = mysql_query($sql) or die(mysql_error());
 		

@@ -41,7 +41,7 @@ echo $_SESSION['MM_pro_estado'];
 */
 
 $sql = "SELECT * FROM hospitalizaciones where id = '".$id_hosp."'";
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 $query = mysql_query($sql) or die(mysql_error());
 
@@ -170,7 +170,7 @@ $hospitalizacion = mysql_fetch_array($query);
 
 <?
 $sql = "SELECT * FROM hospitalizaciones where cod_servicio = '".$cod_servicio."' and sala = '".$sala."' and cama = '".$cama."'order by fecha_ingreso DESC";
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 $query = mysql_query($sql) or die(mysql_error());
 

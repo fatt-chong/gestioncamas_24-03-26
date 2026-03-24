@@ -93,7 +93,7 @@ echo "</td>";
 echo "</tr>";
 echo "</table>";
 
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 
 $resultado1 = mysql_query( "UPDATE camas SET 	
@@ -104,7 +104,7 @@ WHERE id = $id_cama "  ) or die(mysql_error());
 
 $tipo_traslado = 3;
 
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 
 $llama_tipo1 = cual_tipo($servicio);

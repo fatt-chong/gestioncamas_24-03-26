@@ -1,6 +1,6 @@
 <?php 
 	// Recopilamos las prestaciones de Rayos según fecha de corte del mes de proceso de imagenologia
-	$paciente = mysql_pconnect('10.6.21.12', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
+	$paciente = mysql_pconnect('10.6.21.29', 'gestioncamas', '123gestioncamas') or trigger_error(mysql_error(),E_USER_ERROR); 
 	mysql_select_db('camas', $paciente);
 	
 	//$fecha_inicial = $ano_proceso . '-' . $mes_proceso . '-01';

@@ -10,7 +10,7 @@ class conectar{
 	function __construct(){
 		$this->user = "gestioncamas";
 		$this->pass = "123gestioncamas";
-		$this->server = "10.6.21.12";
+		$this->server = "10.6.21.29";
 	}
 	
 	function db_connect(){

@@ -19,7 +19,7 @@ if($_GET['PACid'])
 if($_POST['PACid'])
 	$PACid = $_POST['PACid'];
 	
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 $sqlCamaSN = mysql_query("SELECT *
 						FROM
@@ -48,7 +48,7 @@ $pert_servicio = $arrayCamaSN['desde_codServSN'];
 $permisos = $_SESSION['permiso'];
 
 function homologaServicio2($idServicio){
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('camas') or die('Cannot select database');
 		$sql = mysql_query("SELECT
 				sscc.id,

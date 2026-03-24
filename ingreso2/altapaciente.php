@@ -170,7 +170,7 @@ function change(number, picture) {
 	}
 
 	
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 
 	if ($tipo_atencion <> 'XXX' && $tipo_atencion !="")
 	{

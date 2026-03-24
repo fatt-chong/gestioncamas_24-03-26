@@ -93,7 +93,7 @@ function ValidaDVRut($rut) {
     } 
   return $codigo_veri; 
 } 
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 mysql_query("SET NAMES 'utf8'");
 

@@ -67,7 +67,7 @@ $estado = $_SESSION['MM_pro_estado'];
 
 <?
 
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 $query = mysql_query("SELECT * FROM camas where cod_servicio = $cod_servicio order by sala, cama") or die(mysql_error());
 

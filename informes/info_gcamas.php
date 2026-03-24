@@ -276,7 +276,7 @@ $fecha_hasta_proceso = cambiarFormatoFecha($fecha_hasta);
 		
 		echo "</tr>";
 		
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('camas') or die('Cannot select database');
 		$query = mysql_query($sql) or die(mysql_error());
 
@@ -396,7 +396,7 @@ $fecha_hasta_proceso = cambiarFormatoFecha($fecha_hasta);
 //					ORDER BY desde_nomServSN ASC";
 		}
 		//camas normales
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('camas') or die('Cannot select database');
 		$query2 = mysql_query($sql) or die(mysql_error());
 		// campas SN pensionado
@@ -572,7 +572,7 @@ echo "</td></tr>";
 	case 3: 
 	
 			$sql = "SELECT * FROM sscc WHERE id < 89";
-			mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+			mysql_connect ('10.6.21.29','usuario','hospital');
 			mysql_select_db('camas') or die('Cannot select database');
 			$query = mysql_query($sql) or die(mysql_error());
 			
@@ -588,7 +588,7 @@ echo "</td></tr>";
 					WHERE camas.id_paciente <>  0 
 					AND DATEDIFF(curdate(),camas.hospitalizado ) > '$cantidad' ".$criterioServicio."
 					ORDER BY camas.hospitalizado ASC";
-			mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+			mysql_connect ('10.6.21.29','usuario','hospital');
 			mysql_select_db('camas') or die('Cannot select database');
 			$row10Dias = mysql_query($sql) or die(mysql_error()."<br>ERROR EN REPORTE 10 DIAS<br> $sql");
 
@@ -740,7 +740,7 @@ echo "</td></tr>";
 
 		$sql = "SELECT * FROM hospitalizaciones where cod_destino > 100 and fecha_egreso BETWEEN '".$fecha_desde_proceso."' AND '".$fecha_hasta_proceso."' order by cod_servicio";
 
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		mysql_select_db('camas') or die('Cannot select database');
 		$query = mysql_query($sql) or die(mysql_error());
 		
@@ -980,7 +980,7 @@ $cont_pensionado_barthel_corr = 0;
 if($act == 1){
 	$fechainicio = cambiarFormatoFecha2($fechaD1);
 	$fechahasta = cambiarFormatoFecha2($fechaH1);
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');  // Reporte Pabellon
 
 	 	 $sql = "SELECT
@@ -1916,7 +1916,7 @@ $cont_pensionado_no = 0;
 if($act == 2){
 	$fechainicio = cambiarFormatoFecha2($fechaD1);
 	$fechahasta = cambiarFormatoFecha2($fechaH1);
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');  // Reporte Pabellon
 
 	 	 $sql = "SELECT
@@ -2781,7 +2781,7 @@ break;
 //INDICE BARTHEL
 case 7:
 
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');  // Reporte Pabellon
 
 	$fechaBusca1 = cambiarFormatoFecha2($fechaD1);
@@ -2864,7 +2864,7 @@ case 7:
 break;
 case 8:
 
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database');  // Reporte remA03
 
 	$fechaBusca1 = cambiarFormatoFecha2($fechaD1);

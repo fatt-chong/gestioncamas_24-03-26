@@ -34,7 +34,7 @@ $usuario_salida = $_SESSION['MM_Username'];
             <td background="img/fondo.jpg">
             	<fieldset>
 <?
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 
 $id_cama = $_SESSION['MM_pro_id_cama'];
@@ -121,7 +121,7 @@ else
 
 $fecha_hospitalizacion = cambiarFormatoFecha2($fecha_ingreso);
 
-		mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+		mysql_connect ('10.6.21.29','usuario','hospital');
 		$sql = "SELECT * FROM sscc where id = '".$servicio."'";
 		mysql_select_db('camas') or die('Cannot select database');
 		

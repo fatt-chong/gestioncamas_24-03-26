@@ -10,7 +10,7 @@ header("Refresh: 60; URL='camaSuperNum.php'");
 
 require_once('../../acceso/cargarpermiso.php');
 include "../funciones/funciones.php";	
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 mysql_query("SET NAMES 'utf8'");
 

@@ -47,7 +47,7 @@ $fecha_alta = $fecha_egreso;
 $fecha_ingreso = cambiarFormatoFecha($fecha_hospitalizacion);
 $fecha_egreso = cambiarFormatoFecha($fecha_alta);
 
-mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+mysql_connect ('10.6.21.29','usuario','hospital');
 
 mysql_select_db('camas') or die('Cannot select database');
 $query = mysql_query("SELECT * FROM sscc where id = $cod_servicio") or die(mysql_error());

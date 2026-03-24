@@ -87,7 +87,7 @@ if ($cualtab == '')
 	<?
 	include "../funciones/funciones.php";	
 
-	mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+	mysql_connect ('10.6.21.29','usuario','hospital');
 	
 	mysql_select_db('pensionado') or die('Cannot select database');
 
@@ -580,7 +580,7 @@ $infPacientePen = "<b>- Paciente</b> : ".$arrayCamasPensio['nombrePensio']."<br/
 			<tr>
 			<td align='left' colspan="3" >
 			<? 
-			mysql_connect ('10.6.21.12','gestioncamas','123gestioncamas');
+			mysql_connect ('10.6.21.29','usuario','hospital');
 			mysql_select_db('camas') or die('Cannot select database');
 			$query = mysql_query("SELECT * FROM camas where cod_servicio = $servicio order by sala, cama") or die(mysql_error());
 
