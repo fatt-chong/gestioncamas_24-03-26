@@ -151,7 +151,9 @@ while($l_medicos = mysql_fetch_array($query)){
 }
 
 print_r("<pre>"); print_r("*** medicos ***"); print_r("</pre>");
+print_r("<pre>"); print_r($id_medicos); print_r("</pre>");
 print_r("<pre>"); print_r($medicos); print_r("</pre>");
+print_r("<pre>"); print_r("*** medicos ***"); print_r("</pre>");
 
 $sql = "SELECT * FROM sscc WHERE id < 100";
 mysql_select_db('camas') or die('Cannot select database');
