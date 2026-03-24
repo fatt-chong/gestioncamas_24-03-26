@@ -1,0 +1,772 @@
+<? if (!isset($_SESSION)) {
+  session_start();
+}
+$dbhost = $_SESSION['BD_SERVER'];
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<title>Gestion de Camas Hospital Dr. Juan No&eacute C.</title>
+<link type="text/css" rel="stylesheet" href="css/estilo.css" />
+<link href="../gestioncamas/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css" />
+
+<script language="JavaScript" src="../gestioncamas/tablas/tigra_tables.js"></script>
+<script src="../gestioncamas/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+<script language="JavaScript" src="../gestioncamas/tablas/tigra_hints.js"></script>
+<script src="../gestioncamas/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+<style>
+		.hintsClass {
+			font-family: tahoma, verdana, arial;
+			font-size: 12px;
+			background-color: #f0f0f0;
+			color: #000000;
+			border: 1px solid #808080;
+			padding: 5px;
+		}
+	</style>
+<link href="../gestioncamas/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+</head>
+<? $permisos = $_SESSION['permiso'];
+
+include "../gestioncamas/funciones/funciones.php";
+if ($PACid <> "")
+{
+	$sql = "SELECT * FROM paciente where id = '".$PACid."'";
+
+	mysql_connect ($dbhost,'gestioncamas','123gestioncamas');
+	mysql_select_db('paciente') or die('Cannot select database');
+	mysql_query("SET NAMES utf8");
+	$query = mysql_query($sql) or die(mysql_error());
+	
+	$paciente = mysql_fetch_array($query);
+	if ($paciente)
+	{
+		$id_paciente = $paciente['id'];
+		$rut_paciente = $paciente['rut'];
+		$ficha_paciente = $paciente['nroficha'];
+		$nom_paciente = $paciente['nombres']." ".$paciente['apellidopat']." ".$paciente['apellidomat'];
+		$cod_prevision = $paciente['prevision'];
+		$direc_paciente = $paciente['direccion'];
+		$cod_comuna = $paciente['idcomuna'];
+		$fono1_paciente = $paciente['fono1'];
+		$fono2_paciente = $paciente['fono2'];
+		$fono3_paciente = $paciente['fono3'];
+		$hospitalizado = $paciente['hospitalizado'];
+
+		$sql = "SELECT * FROM prevision where id = '".$cod_prevision."'";
+		mysql_connect ($dbhost,'gestioncamas','123gestioncamas');
+		mysql_select_db('paciente') or die('Cannot select database');
+		$query = mysql_query($sql) or die(mysql_error());
+		
+		$l_prevision = mysql_fetch_array($query);
+		
+		$prevision = $l_prevision['prevision'];
+		
+		$sql = "SELECT * FROM comuna where id = '".$cod_comuna."'";
+		mysql_connect ($dbhost,'gestioncamas','123gestioncamas');
+		mysql_select_db('paciente') or die('Cannot select database');
+		$query = mysql_query($sql) or die(mysql_error());
+		
+		$l_comuna = mysql_fetch_array($query);
+		
+		$comuna = $l_comuna['comuna'];
+	}
+
+}
+
+$opcion_1 == 'on';
+	
+	?>
+
+<body background="../../estandar/img/fdo.jpg" topmargin="5" style="font-family:Arial, Helvetica, sans-serif; font-size:12px">
+  <table width="890px" align="center" border="2" bordercolor="#000000" bordercolorlight="#FFFFFF" bordercolordark="#666666" cellspacing="0" cellpadding="0">
+    	<th height="30px" align="left" bgcolor="#006699" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#FFF">&nbsp; Historial Cl&iacute;nico de Paciente.</th>
+
+        <tr>
+            <td background="../../estandar/img/fondo.jpg">
+            	<fieldset>
+
+					<div>
+
+
+
+
+
+
+
+
+
+
+<!-- Aca Comienza lo Igual    -->
+
+<fieldset>
+
+	<div id="TabbedPanels1" class="TabbedPanels">
+    	<ul class="TabbedPanelsTabGroup">
+      		<li class="TabbedPanelsTab" onclick="javascript:document.getElementById('cualtab').value='0';" tabindex="0">FARMACIA</li>
+   		  	<li class="TabbedPanelsTab" onclick="javascript:document.getElementById('cualtab').value='1';" tabindex="0">LABORATORIO</li>
+   		  	<li class="TabbedPanelsTab" onclick="javascript:document.getElementById('cualtab').value='2';" tabindex="0">PABELLON</li>
+   		  	<li class="TabbedPanelsTab" onclick="javascript:document.getElementById('cualtab').value='3';" tabindex="0">IMAGENOLOGIA</li>
+   		  	<li class="TabbedPanelsTab" onclick="javascript:document.getElementById('cualtab').value='4';" tabindex="0">A. PATOLOGICA</li>
+      		<li class="TabbedPanelsTab" onclick="javascript:document.getElementById('cualtab').value='5';" tabindex="0">HEMODIALISIS</li>
+            <li class="TabbedPanelsTab" onclick="javascript:document.getElementById('cualtab').value='6';" tabindex="0">EPICRISIS</li>
+    	</ul>
+    	<div class="TabbedPanelsContentGroup">
+      		<div class="TabbedPanelsContent">
+            
+                <table width="800px" align="center" border="0" cellspacing="1" cellpadding="1">
+                    <tr>
+                        <td>
+                            <div id="afectado" align="left" style="float:none; width: 100%; padding: 5px;">
+                                <table border="1" cellpadding="1px" cellspacing="0px">
+                                    <tr valign="middle">
+                                        <td width="65">Codigo</td>
+                                        <td width="330">Farmaco</td>
+                                        <td width="65">Cantidad</td>
+                                        <td width="100">U. Medida</td>
+                                        <td width="100">Servcio</td>
+                                        <td width="70">Fecha</td>
+                                    </tr>
+                                </table>
+                                <div style="width:780px;height:290px;overflow:auto;">
+                                    <?php
+                                    echo "<table id='farmacia' border='1' cellpadding='1px' cellspacing='0px'>";
+                                        if ($id_paciente == 0)
+                                        {
+										    if($opcion_1 == 'on')
+											{
+                                            	$sql = "SELECT * FROM egresosdetalle where egreCtaCteCod = '".$cta_cte."' order by egreFecha2 DESC";
+											}
+											else
+											{
+                                            	$sql = "SELECT * FROM egresosdetalle where egreCtaCteCod = '".$cta_cte."' and egreFecha2 >= '".$fecha_hospitalizacion."' order by egreFecha2 DESC";
+											}
+                                        }
+                                        else
+                                        {
+										    if($opcion_1 == 'on')
+											{
+	                                            $sql = "SELECT * FROM egresosdetalle where egrePacId = '".$id_paciente."' order by egreFecha2 DESC";
+											}
+											else
+											{
+                                            	$sql = "SELECT * FROM egresosdetalle where egrePacId = '".$id_paciente."' and egreFecha2 >= '".$fecha_hospitalizacion."' order by egreFecha2 DESC";
+											}
+
+                                        }
+        
+                                        if ($id_paciente <> 0 or $cta_cte <> 0)
+                                        {
+                                            //$sql = "SELECT * FROM hospitalizaciones where rut_paciente = '".$rut_paciente."'";
+                                            mysql_select_db('farmacos') or die('Cannot select database');
+											mysql_query("SET NAMES utf8");
+                                            $query2 = mysql_query($sql) or die(mysql_error());
+                                            while($list_paciente = mysql_fetch_array($query2)){
+                                                $id_hosp = $list_paciente['id'];
+                                                ?>
+                                                <tr align="left" height="25px" style="font-size:10px; font-family:Verdana, Arial, Helvetica, sans-serif">
+													<? $sql = "SELECT * FROM sscc where id_rau = '".$list_paciente['egreserviCod2']."'";
+                                                    mysql_select_db('camas') or die('Cannot select database');
+                                                    $query = mysql_query($sql) or die(mysql_error());
+                                                    $l_servicios = mysql_fetch_array($query);
+                                                    $dsk_servicio = $l_servicios['servicio'];
+                                                    ?>
+                                                    <td width="65"><? echo $list_paciente['produCodInt']; ?>	</td>
+                                                    <td width="330"><? echo $list_paciente['egreproduNombre']; ?> </td>
+                                                    <td width="65" align="right"><? echo $list_paciente['egreDespachado']; ?> </td>
+                                                    <td width="100"><? echo $list_paciente['egreumediCod']; ?> </td>
+                                                    <td width="100"><? echo $dsk_servicio; ?>&nbsp;</td>
+                                                    <td width="70"><? echo cambiarFormatoFecha(substr($list_paciente['egreFecha2'],0,10)); ; ?> </td>
+                                                 </tr>
+                                                    <?
+                                                
+                                            }
+                                        }
+                                        ?>
+			  						</table>
+                                    <script language="JavaScript">
+                                    <!--
+                                        tigra_tables('farmacia', 0, 0, '#ffffff', '#EFEFEF', '#BCBCBC', '');
+                                    // -->
+                                    </script>
+		  						</div>
+	  						</div>	
+                        </td>
+                    </tr>
+				</table>
+            
+            </div>
+      		
+            <div class="TabbedPanelsContent">
+            
+                <table width="800px" align="center" border="0" cellspacing="1" cellpadding="1">
+                    <tr>
+                        <td>
+                            <div id="afectado" align="left" style="float:none; width: 100%; padding: 5px;">
+                                <table border="1" cellpadding="1px" cellspacing="0px">
+                                    <tr valign="middle">
+                                        <td width="70">N° Examen</td>
+                                        <td width="230">M&eacute;dico Solicitante</td>
+                                        <td width="130">Servicio</td>
+                                        <td width="110">Atenci&oacute;n</td>
+                                        <td width="110">Prioridad</td>
+                                        <td width="80">Fecha</td>
+                                    </tr>
+                                </table>
+                                <div style="width:780px;height:290px;overflow:auto;">
+                                    <?php
+                                    echo "<table id='laboratorio' border='1' cellpadding='1px' cellspacing='0px'>";
+                                        if ($rut_paciente <> 0 or $cta_cte <> 0)
+                                        {
+										    if($opcion_1 == 'on')
+											{
+                                            	$sql = "SELECT * FROM controllaboratorio where rut_paciente = '".$rut_paciente."' order by solicitud_examen DESC";
+											}
+											else
+											{
+                                            	$sql = "SELECT * FROM controllaboratorio where rut_paciente = '".$rut_paciente."' and fecha_extraccion >= '".$fecha_hospitalizacion."' order by solicitud_examen DESC";
+											}
+
+                                            mysql_select_db('paciente') or die('Cannot select database');
+                                            $query2 = mysql_query($sql) or die(mysql_error());
+                                            $i_mens_todos = 0;
+                                            while($list_paciente = mysql_fetch_array($query2))
+                                            {
+                                                $solicitud_examen = $list_paciente['solicitud_examen'];
+                                                ?>
+                                                <tr height="25px" onclick="window.open('../../omega/pdf/<? echo $solicitud_examen; ?>.PDF','', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=450')" onmouseover="myHint.show(<? echo $i_mens_todos; ?>)" onmouseout="myHint.hide()" align="left" style="font-size:10px; font-family:Verdana, Arial, Helvetica, sans-serif">
+                                                    <td width="70"><? echo $solicitud_examen; ?> </td>
+                                                    <td width="230"><? echo $list_paciente['nomb_medico']; ?> </td>
+                                                    <td width="130"><? echo $list_paciente['desc_servicio']; ?> </td>
+                                                    <td width="110"><? echo $list_paciente['desc_solicitante']; ?> </td>
+                                                    <td width="110"><? echo $list_paciente['tipo_solicitante']; ?> </td>
+                                                    <td width="80"><? echo cambiarFormatoFecha(substr($list_paciente['fecha_extraccion'],0,10)); ; ?> </td>
+                                                </tr>
+                                                    <?
+                                                
+                                                $sql = "SELECT * FROM prestacioneslaboratorio where solicitud_examen = '".$solicitud_examen."' ";
+                                                mysql_select_db('paciente') or die('Cannot select database');
+												mysql_query("SET NAMES utf8");
+                                                $query_prestacion = mysql_query($sql) or die(mysql_error());
+                                                while($list_prestacion = mysql_fetch_array($query_prestacion))
+                                                {
+                                                    $numero_orden = $list_prestacion['numero_orden'];
+                                                    $arreglo_camas[$i_mens_todos] = $arreglo_camas[$i_mens_todos]." <b>- ".$list_prestacion['desc_prestacion']."</b> : ";
+                                                    if ($list_prestacion['tipo_prueba'] == "B")
+                                                    {
+                                                        $sql = "SELECT * FROM resultadoslaboratorio where solicitud_examen = '".$solicitud_examen."' and numero_orden = '".$numero_orden."' ";
+                                                        mysql_query("SET NAMES utf8");
+														mysql_select_db('paciente') or die('Cannot select database');
+                                                        $query_resultado = mysql_query($sql) or die(mysql_error());
+                                                        while($list_resultado = mysql_fetch_array($query_resultado))
+                                                        {
+                                                            $arreglo_camas[$i_mens_todos] = $arreglo_camas[$i_mens_todos]." ".$list_resultado['resultado']." ".$list_resultado['unidades']."  ";
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        $arreglo_camas[$i_mens_todos] = $arreglo_camas[$i_mens_todos]." Prueba Microbiologica (Ver Resultado en Informe) ";
+                                                    }
+                                                        $arreglo_camas[$i_mens_todos] = $arreglo_camas[$i_mens_todos]." <br>";
+                                                }
+                                                $i_mens_todos++;
+                                            }
+                                        }
+                                        ?>
+			  						</table>
+
+		  						</div>
+							</div>	
+                        </td>
+                    </tr>
+                </table>
+            
+            </div>
+      		<div class="TabbedPanelsContent">
+            
+                <table width="800px" align="center" border="0" cellspacing="1" cellpadding="1">
+                    <tr>
+                        <td>
+                            <div id="afectado" align="left" style="float:none; width: 100%; padding: 5px;">
+                                <table border="1" cellpadding="1px" cellspacing="0px">
+                                    <tr valign="middle">
+                                        <td width="70">Fecha</td>
+                                        <td width="50">Hora</td>
+                                        <td width="55">Pabell&oacute;n</td>
+                                        <td width="200">Prestaci&oacute;n</td>
+                                        <td width="105">Estado</td>
+                                        <td width="135">Servicio</td>
+                                        <td width="105">Cirujano</td>
+                                        
+                                    </tr>
+                                </table>
+                                <div style="width:780px;height:290px;overflow:auto;">
+                                    <?php
+                                    echo "<table id='pabellon' border='1' cellpadding='1px' cellspacing='0px'>";
+                                        if ($id_paciente <> 0)
+                                        {
+										    if($opcion_1 == 'on')
+											{
+	                                            $sql = "SELECT * FROM cirugia where pacieCod = '".$id_paciente."' order by ciruFecha DESC";
+											}
+											else
+											{
+                                            	$sql = "SELECT * FROM cirugia where pacieCod = '".$id_paciente."' and ciruFecha >= '".$fecha_hospitalizacion."' order by ciruFecha DESC";
+											}
+
+                                            mysql_select_db('pabellon') or die('Cannot select database');
+                                            mysql_query("SET NAMES utf8");
+											$query2 = mysql_query($sql) or die(mysql_error());
+                                            while($list_pabellon = mysql_fetch_array($query2))
+                                            {
+												$fecha = $list_pabellon['ciruFecha'];
+												$hora = $list_pabellon['ciruHora'];
+												$pabellon = $list_pabellon['pabCod'];
+												$prestacion = $list_pabellon['ciruInter1Glosa'];
+												$estado = $list_pabellon['ciruEstado'];
+												
+												$cd_servicio = $list_pabellon['ciruServOrigCod'];
+												
+												$cod_cirujano_1 = $list_pabellon['ciruCirujano1'];
+												$cod_cirujano_2 = $list_pabellon['ciruCirujano2'];
+												$cod_cirujano_3 = $list_pabellon['ciruCirujano3'];
+												$cod_anestesista = $list_pabellon['ciruAnestesista'];
+												
+												$h_llegada = $list_pabellon['ciruHLlegada'];
+												$h_anestesia = $list_pabellon['ciruHAnest'];
+												$h_inicio = $list_pabellon['ciruHICirugia'];
+												$h_termino = $list_pabellon['ciruHTCirugia'];
+												$h_salida = $list_pabellon['ciruHSalida'];
+												$motivo = $list_pabellon['ciruMotSuspencion'];
+
+	                                            $sql = "SELECT * FROM servicio where idservicio = '".$cd_servicio."'";
+												mysql_select_db('acceso') or die('Cannot select database');
+    	                                        $query3 = mysql_query($sql) or die(mysql_error());
+												$lisservicio =  mysql_fetch_array($query3);
+												if ( $lisservicio ) {  $servicio = $lisservicio['nombre']; } else { $servicio = " "; }
+												
+	                                            $sql = "SELECT * FROM medico where id = '".$cod_cirujano_1."'";
+    	                                        $query3 = mysql_query($sql) or die(mysql_error());
+												$lismedico =  mysql_fetch_array($query3);
+												if ( $lismedico ) {  $cirujano_1 = $lismedico['nombremedico']; } else { $cirujano_1 = " "; }
+												
+	                                            $sql = "SELECT * FROM medico where id = '".$cod_cirujano_2."'";
+    	                                        $query3 = mysql_query($sql) or die(mysql_error());
+												$lismedico =  mysql_fetch_array($query3);
+												if ( $lismedico  ) {  $cirujano_2 = $lismedico['nombremedico']; } else { $cirujano_2 = " "; }
+												
+	                                            $sql = "SELECT * FROM medico where id = '".$cod_cirujano_3."'";
+    	                                        $query3 = mysql_query($sql) or die(mysql_error());
+												$lismedico =  mysql_fetch_array($query3);
+												if ( $lismedico  ) {  $cirujano_3 = $lismedico['nombremedico']; } else { $cirujano_3 = " "; }
+												
+	                                            $sql = "SELECT * FROM medico where id = '".$cod_anestesista."'";
+    	                                        $query3 = mysql_query($sql) or die(mysql_error());
+												$lismedico =  mysql_fetch_array($query3);
+												if ( $lismedico  ) {  $anestesista = $lismedico['nombremedico']; } else { $anestesista = " "; }
+												
+												
+                                                ?>
+                                                <tr height="25px" onmouseover="myHint.show(<? echo $i_mens_todos; ?>)" onmouseout="myHint.hide()" align="left" style="font-size:10px; font-family:Verdana, Arial, Helvetica, sans-serif">
+                                                    <td width="70"><? echo cambiarFormatoFecha($fecha); ?> </td>
+                                                    <td width="50"><? echo substr($hora,0,5); ?> </td>
+                                                    <td width="55"><? echo $pabellon; ?> </td>
+                                                    <td width="200"><? echo $prestacion; ?> </td>
+                                                    <td width="105"><? echo $estado; ?> </td>
+                                                    <td width="135"><? echo $servicio; ?> </td>
+                                                    <td width="105"><? echo $cirujano_1; ?> </td>
+                                                    <?
+                                                echo"</tr>";
+                                                $arreglo_camas[$i_mens_todos] = " <b>- 1er Cirujano : </b>".$cirujano_1."<br> <b>- 2er Cirujano : </b>".$cirujano_2."<br> <b>- Anestesista : </b>".$anestesista."<br> <b>- Hora Llegada : </b>".$h_llegada."<br> <b>- Hora Anestesia : </b>".$h_anestesia."<br> <b>- Hora Inicio : </b>".$h_inicio."<br> <b>- Hora Termino : </b>".$h_termino."<br> <b>- Hora Salida : </b>".$h_salida."<br>  <b>- Observacion : </b>".$motivo."<br>";
+
+												$i_mens_todos++;
+												
+                                            }
+                                        }
+                                        ?>
+			  						</table>
+                                    <script language="JavaScript">
+                                    <!--
+                                        tigra_tables('pabellon', 0, 0, '#ffffff', '#EFEFEF', '#BCBCBC', '');
+                                    // -->
+                                    </script>
+		  						</div>
+							</div>	
+                        </td>
+                    </tr>
+                </table>
+            
+            </div>
+      		
+            <div class="TabbedPanelsContent">
+            
+                <table width="800px" align="center" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                        <div align="left" style="float:none; width: 100%; height:315px; padding: 5px;">
+                        	<table border="1" cellpadding="3px" cellspacing="0px">
+                            	<tr valign="middle">
+                                    <td width="71" align="center">Fecha</td>
+                                    <td width="53" align="center">Codigo</td>
+                                    <td width="45" align="center">Tipo</td>
+                                    <td width="212">Prestacion</td>
+                                    <td width="59" align="center">Cantidad</td>
+                                    <td width="194">Procedencia</td>
+                                    <td width="77" align="center">C/Informe</td>
+                                 </tr>
+                             </table>
+                                    <?php
+									echo "<table id='imagenologia' border='1' cellpadding='3' cellspacing='0'>";
+                                        if ($rut_paciente <> 0 or $cta_cte <> 0)
+                                        {
+										    if($opcion_1 == 'on')
+											{
+                                            	$sql = "SELECT DISTINCT(rayos.examen.EXAcorrelativo), rayos.atencion.ATEprocede, rayos.atencion.ATEfecha, rayos.examen.PREcod, paciente.prestacion.preNombre,
+														rayos.examen.PREcantidad, rayos.examen.EXAinforme_numero, rayos.examen.EXAinforme_estado, rayos.examen.EXTIcod, serv.nombre AS servicio, esp.nombre AS especialidad
+														FROM rayos.atencion
+														Left Join rayos.examen ON rayos.examen.ATEcorrelativo = rayos.atencion.ATEcorrelativo
+														Left Join paciente.prestacion ON paciente.prestacion.preCod = rayos.examen.PREcod
+														Inner Join acceso.servicio AS serv ON rayos.atencion.ATEservicio = serv.idservicio
+														Inner Join acceso.servicio AS esp ON rayos.atencion.ATEespecialidad = esp.idservicio
+														WHERE rayos.atencion.PACid = '".$id_paciente."' ORDER BY ATEfecha DESC";
+											}
+											else
+											{
+                                            	$sql = "SELECT DISTINCT(rayos.examen.EXAcorrelativo), rayos.atencion.ATEprocede, rayos.atencion.ATEfecha, rayos.examen.PREcod, paciente.prestacion.preNombre,
+														rayos.examen.PREcantidad, rayos.examen.EXAinforme_numero, rayos.examen.EXAinforme_estado, rayos.examen.EXTIcod, serv.nombre AS servicio, esp.nombre AS especialidad
+														FROM rayos.atencion
+														Left Join rayos.examen ON rayos.examen.ATEcorrelativo = rayos.atencion.ATEcorrelativo
+														Left Join paciente.prestacion ON paciente.prestacion.preCod = rayos.examen.PREcod
+														Inner Join acceso.servicio AS serv ON rayos.atencion.ATEservicio = serv.idservicio
+														Inner Join acceso.servicio AS esp ON rayos.atencion.ATEespecialidad = esp.idservicio
+														WHERE rayos.atencion.PACid = '".$id_paciente."' and ATEfecha >= '".$fecha_hospitalizacion."' order by ATEfecha DESC";
+											}
+
+                                            mysql_select_db('rayos') or die('Cannot select database');
+											mysql_query("SET NAMES utf8");
+                                            $query2 = mysql_query($sql) or die(mysql_error());
+                                            while($list_paciente = mysql_fetch_array($query2)){
+                                                $id_hosp = $list_paciente['id'];
+												switch($list_paciente['ATEprocede']){
+													case 1: $procedencia="Urgencia"; break;
+													case 2: $procedencia="Ambulatoria"; break;
+													case 3: $procedencia="Hospitalización"; break;
+													case 4: $procedencia="A.Primaria"; break;
+													case 5: $procedencia="Clínica"; break;
+													case 6: $procedencia="Otro"; break;							
+												}
+                                                ?>
+                                                
+                                                <tr style="font-size:12px; font-family:Arial, Helvetica, sans-serif;<? if($list_paciente['EXAinforme_numero']) echo 'cursor:pointer;'?>" 
+													<? $INFkey = $list_paciente['EXAinforme_numero'];
+														 if($list_paciente['EXAinforme_estado'] == 'C') 
+                                                            echo " onClick='javascript: window.open(\"../../imagenologia/informes_radiologicos/INF_".$INFkey.".pdf\",\"\",\"titlebars=0,toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,height=800,width=1000\")';";
+                                                       else	if($list_paciente['EXAinforme_estado'] == 'A')
+                                                            echo " onClick='javascript: window.open(\"../../imagenologia/Reportes/informeRadiologico.php?INFkey=$INFkey\",\"\",\"titlebars=0,toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,height=800,width=1000\")';";
+                                                    ?>>
+                                                    <td width="71" align="center"><? echo cambiarFormatoFecha($list_paciente['ATEfecha']); ?></td>
+                                                  	<td width="53" align="center"><? echo $list_paciente['PREcod']; ?></td>
+                                                  	<td width="45" align="center"><? echo $list_paciente['EXTIcod']; ?></td>
+                                                    <td width="212"><? echo truncarTexto($list_paciente['preNombre'], 30); ?> </td>
+                                                    <td width="59" align="center"><? echo $list_paciente['PREcantidad']; ?> </td>
+                                                    <td width="194"><? echo $procedencia; if($list_paciente['ATEprocede'] == 2) echo " (".$list_paciente['especialidad'].")"; else if($list_paciente['ATEprocede'] == 3) echo " (".$list_paciente['servicio'].")";?> </td>
+                                                    <td width="77" align="center">
+													<? if($INFkey){ 
+															if($list_paciente['EXAinforme_estado'] == 'A') 
+																echo "(Pre-Informe)";
+															else
+																echo "(Validado)";
+														}else{
+															echo "--";
+														}
+													?>                                                           
+                                                    </td>
+                                                </tr>
+												<?
+                                                
+                                            }
+                                        }
+                                        ?>
+			  						</table>
+                                    <script language="JavaScript">
+                                    <!--
+                                        tigra_tables('imagenologia', 0, 0, '#ffffff', '#EFEFEF', '#BCBCBC', '');
+                                    // -->
+                                    </script>
+  						  
+                          </div>
+                      </td>
+                    </tr>
+				</table>
+            
+            </div>
+      		<div class="TabbedPanelsContent">
+            
+                <table width="800px" align="center" border="0" cellspacing="1" cellpadding="1">
+                    <tr>
+                        <td>
+                            <div id="afectado" align="left" style="float:none; width: 100%; padding: 5px;">
+                                <table border="1" cellpadding="3px" cellspacing="0px">
+                                    <tr valign="middle">
+                                        <td width="100" align="center">Fecha</td>
+                                   	  	<td width="120">Tipo Examen</td>
+                                        <td width="100">Folio Examen</td>
+                                        <td width="250">Procedencia</td>
+                                    </tr>
+                                </table>
+                                <div style="width:780px;height:285px;overflow:auto;">
+                                    <?php
+                                    echo "<table id='anatomia' border='1' cellpadding='3px' cellspacing='0px'>";
+                                        if ($id_paciente <> 0 or $cta_cte <> 0)
+                                        {
+										    if($opcion_1 == 'on')
+											{
+                                            	$sql = "SELECT DISTINCT ana.regAId, ana.regAtipoExamen, ana.regAFechaSolicitud, ana.regAFechaTomaPap,
+														ana.regAserviCod, serv.nombre,ana.regAConsultorio, cons.consulDesc,ana.regAFolioInterno, ana.regNumFolioDiag
+														FROM controlanatomia AS ana
+														LEFT JOIN acceso.servicio AS serv ON ana.regAserviCod = serv.idservicio
+														LEFT JOIN consultorios AS cons ON ana.regAConsultorio = cons.consulCod
+														WHERE pacId = '".$id_paciente."' ORDER BY regAId DESC";
+											}
+											else
+											{
+                                            	$sql = "SELECT DISTINCT ana.regAId, ana.regAtipoExamen, ana.regAFechaSolicitud, ana.regAFechaTomaPap,
+														ana.regAserviCod, serv.nombre,ana.regAConsultorio, cons.consulDesc,ana.regAFolioInterno, ana.regNumFolioDiag
+														FROM controlanatomia AS ana
+														LEFT JOIN acceso.servicio AS serv ON ana.regAserviCod = serv.idservicio
+														LEFT JOIN consultorios AS cons ON ana.regAConsultorio = cons.consulCod
+														WHERE pacId = '".$id_paciente."' ORDER BY regAId DESC";
+											}
+
+                                            mysql_select_db('anatomia') or die('Cannot select database');
+                                            $query2 = mysql_query($sql) or die(mysql_error());
+                                            while($list_paciente = mysql_fetch_array($query2)){
+                                                $id_hosp = $list_paciente['id'];
+                                                ?>
+                                                <tr align="left" height="25px" style="font-size:10px; font-family:Verdana, Arial, Helvetica, sans-serif; cursor:pointer;"
+													<? $regAId = $list_paciente['regAId'];
+														if($list_paciente['regAtipoExamen'] == 'P') 
+                                                            echo " onClick='javascript: window.open(\"http://localhost:8080/anatomiaPatologica/servlet/ainformepap?$regAId\",\"\",\"titlebars=0,toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,height=800,width=1000\")';";
+														else if($list_paciente['regAtipoExamen'] == 'B')
+															echo " onClick='javascript: window.open(\"http://localhost:8080/anatomiaPatologica/servlet/adiagnosticos2?$regAId\",\"\",\"titlebars=0,toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,height=800,width=1000\")';";
+														else if($list_paciente['regAtipoExamen'] == 'M')
+															echo " onClick='javascript: window.open(\"http://localhost:8080/anatomiaPatologica/servlet/adiagnosticosmiscelaneos?$regAId\",\"\",\"titlebars=0,toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,height=800,width=1000\")';";
+                                                    ?>>
+												<td width="100" align="center"><? if($list_paciente['regAtipoExamen'] == 'P') echo cambiarFormatoFecha($list_paciente['regAFechaTomaPap']); else echo cambiarFormatoFecha($list_paciente['regAFechaSolicitud']); ?></td>
+												<td width="120"><? if($list_paciente['regAtipoExamen'] == 'P') echo "PAPANICOLAU"; else if($list_paciente['regAtipoExamen'] == 'B') echo "BIOPSIA"; else echo "MISCELANEO"; ?></td>
+												<td width="100"><? if($list_paciente['regAtipoExamen'] == 'P') echo $list_paciente['regNumFolioDiag']; else echo $list_paciente['regAFolioInterno']; ?></td>
+												<td width="250"><? if($list_paciente['regAtipoExamen'] == 'P') echo $list_paciente['consulDesc']; else echo $list_paciente['nombre']; ?></td>
+                                                <?
+                                                echo"</tr>";
+                                            }
+                                        }
+                                        ?>
+			  						</table>
+                                    <script language="JavaScript">
+                                    <!--
+                                        tigra_tables('anatomia', 0, 0, '#ffffff', '#EFEFEF', '#BCBCBC', '');
+                                    // -->
+                                    </script>
+		  						</div>
+	  						</div>	
+                        </td>
+                    </tr>
+				</table>
+            
+            </div>
+      		<div class="TabbedPanelsContent">
+            
+                <table width="800px" align="center" border="0" cellspacing="1" cellpadding="1">
+                    <tr>
+                        <td>
+                            <div id="afectado" align="left" style="float:none; width: 100%; padding: 5px;">
+                                <table border="1" cellpadding="1px" cellspacing="0px">
+                                    <tr valign="middle">
+                                        <td width="60">Codigo</td>
+                                        <td width="440">Prestacion</td>
+                                        <td width="30">Turno</td>
+                                        <td width="140">Servcio</td>
+                                        <td width="70">Fecha</td>
+                                    </tr>
+                                </table>
+                                <div style="width:780px;height:290px;overflow:auto;">
+                                    <?php
+                                    echo "<table id='dialisis' border='1' cellpadding='1px' cellspacing='0px'>";
+                                        if ($rut_paciente <> 0)
+                                        {
+										    if($opcion_1 == 'on')
+											{
+                                            	$sql = "SELECT * FROM controldialisis where pacId = '".$id_paciente."' order by regFecha DESC";
+											}
+											else
+											{
+                                            	$sql = "SELECT * FROM controldialisis where pacId = '".$id_paciente."' and regFecha >= '".$fecha_hospitalizacion."' order by regFecha DESC";
+											}
+
+                                            mysql_select_db('paciente') or die('Cannot select database');
+                                            $query2 = mysql_query($sql) or die(mysql_error());
+                                            while($list_paciente = mysql_fetch_array($query2)){
+												
+												$codigo = $list_paciente['preCod'];
+												
+												$sql = "SELECT * FROM prestacion where preCod = '".$codigo."'";
+												mysql_select_db('paciente') or die('Cannot select database');
+												$query = mysql_query($sql) or die(mysql_error());
+												$l_prestacion = mysql_fetch_array($query);
+												$desc_prestacion =  $l_prestacion['preNombre'];
+												
+                                                ?>
+                                                <tr align="left" height="25px" style="font-size:10px; font-family:Verdana, Arial, Helvetica, sans-serif">
+												<td width="60"><? echo $list_paciente['preCod']; ?>	</td>
+												<td width="440"><? echo $desc_prestacion; ?> </td>
+												<td width="30"><? echo $list_paciente['regAturno']; ?> </td>
+												<td width="140"><? echo "(".$list_paciente['procedencia'].")"; ?> </td>
+												<td width="70"><? echo cambiarFormatoFecha(substr($list_paciente['regFecha'],0,10)); ; ?> </td>
+                                                <?
+                                                echo"</tr>";
+                                            }
+                                        }
+                                        ?>
+			  						</table>
+                                    <script language="JavaScript">
+                                    <!--
+                                        tigra_tables('dialisis', 1, 0, '#ffffff', '#EFEFEF', '#BCBCBC', '');
+                                    // -->
+                                    </script>
+		  						</div>
+	  						</div>	
+                        </td>
+                    </tr>
+				</table>
+            
+            </div>
+            <div class="TabbedPanelsContent">
+            
+                <table width="800px" align="center" border="0" cellspacing="1" cellpadding="1">
+                    <tr>
+                        <td>
+                            <div id="afectado" align="left" style="float:none; width: 100%; padding: 5px;">
+                                <table border="1" cellpadding="3px" cellspacing="0px">
+                                    <tr valign="middle">
+                                    	<td width="100">Fecha Ingreso</td>
+                                        <td width="150">Servicio</td>
+                                      	<td width="100" align="center">Dias Estada</td>
+                                        <td width="100">Fecha Alta</td>
+                                    </tr>
+                                </table>
+                                <div style="width:780px;height:285px;overflow:auto;">
+                                    <?php
+                                    echo "<table id='epicrisis' border='1' cellpadding='3px' cellspacing='0px'>";
+                                        if ($id_paciente <> 0 or $cta_cte <> 0)
+                                        {
+										    if($opcion_1 == 'on')
+											{
+                                            	$sql = "SELECT epicrisis.epiId, epicrisis.epiTipoId, epicrisis.camasid, epicrisis.epiFechaIngreso, epicrisis.epiFechaEgreso
+														FROM epicrisis
+														WHERE epicrisis.epiIdPaciente = '".$id_paciente."' ORDER BY epiFechaIngreso DESC";
+											}
+											else
+											{
+                                            	$sql = "SELECT epicrisis.epiId, epicrisis.epiTipoId, epicrisis.camasid, epicrisis.epiFechaIngreso, epicrisis.epiFechaEgreso
+														FROM epicrisis
+														WHERE epicrisis.epiIdPaciente = '".$id_paciente."' ORDER BY epiFechaIngreso DESC";
+											}
+
+                                            mysql_select_db('epicrisis') or die('Cannot select database');
+                                            $query2 = mysql_query($sql) or die(mysql_error());
+                                            while($list_paciente = mysql_fetch_array($query2)){?>
+                                                <tr align="left" height="25px" style="font-size:10px; font-family:Verdana, Arial, Helvetica, sans-serif; cursor:pointer;"
+													<? $epiId = $list_paciente['epiId'];
+													$camasid = $list_paciente['camasid'];
+                                                       echo " onClick='javascript: window.open(\"http://localhost:8080/epicrisis/servlet/aimpepicrisis?$id_paciente,$epiId\",\"\",\"titlebars=0,toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,height=800,width=1000\")';";
+                                                    ?>>
+												<td width="100"><? echo cambiarFormatoFecha($list_paciente['epiFechaIngreso']); ?></td>
+                                                <td width="150"><? if($list_paciente['epiTipoId'] == 'P') echo "Pediátrica"; else if($list_paciente['epiTipoId'] == 'M') echo "Médica"; ?></td>
+												<td width="100" align="center"><? echo diferenciaFechas($list_paciente['epiFechaEgreso'],$list_paciente['epiFechaIngreso']); ?></td>
+												<td width="100"><? echo cambiarFormatoFecha($list_paciente['epiFechaEgreso']); ?></td>
+                                                <?
+                                                echo"</tr>";
+                                            }
+                                        }
+                                        ?>
+			  						</table>
+                                    <script language="JavaScript">
+                                    <!--
+                                        tigra_tables('epicrisis', 0, 0, '#ffffff', '#EFEFEF', '#BCBCBC', '');
+                                    // -->
+                                    </script>
+		  						</div>
+	  						</div>	
+                        </td>
+                    </tr>
+				</table>
+            
+            </div>
+    	</div>
+  	</div>
+
+</fieldset>
+
+
+<!-- Aca Termina lo Igual    -->
+
+</br>
+</div>
+
+
+</fieldset>
+</td>
+</tr>
+</table>
+
+
+<?
+
+	if ($i_mens_todos <> 0)
+	{
+		$mens_todos = "'".implode("','",$arreglo_camas)."'";
+	}
+
+?>
+
+
+
+
+
+<SCRIPT LANGUAGE="javascript"> 
+//alert('ya!'); 
+if(!document.layers) 
+midiv.style.visibility='hidden'; 
+else 
+document.midiv.visibility='hide'; 
+</SCRIPT>
+
+<script language="JavaScript">
+// configuration variable for the hint object, these setting will be shared among all hints created by this object
+var HINTS_CFG = {
+	'wise'       : true, // don't go off screen, don't overlap the object in the document
+	'margin'     : 10, // minimum allowed distance between the hint and the window edge (negative values accepted)
+	'gap'        : 20, // minimum allowed distance between the hint and the origin (negative values accepted)
+	'align'      : 'bctl', // align of the hint and the origin (by first letters origin's top|middle|bottom left|center|right to hint's top|middle|bottom left|center|right)
+	'css'        : 'hintsClass', // a style class name for all hints, applied to DIV element (see style section in the header of the document)
+	'show_delay' : 0, // a delay between initiating event (mouseover for example) and hint appearing
+	'hide_delay' : 200, // a delay between closing event (mouseout for example) and hint disappearing
+	'follow'     : true, // hint follows the mouse as it moves
+	'z-index'    : 100, // a z-index for all hint layers
+	'IEfix'      : false, // fix IE problem with windowed controls visible through hints (activate if select boxes are visible through the hints)
+	'IEtrans'    : ['blendTrans(DURATION=.3)', null], // [show transition, hide transition] - nice transition effects, only work in IE5+
+	'opacity'    : 95 // opacity of the hint in %%
+};
+// text/HTML of the hints
+
+var HINTS_ITEMS = [ <? echo $mens_todos; ?> ];
+
+var myHint = new THints (HINTS_ITEMS, HINTS_CFG);
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+</script>
+
+
+</body>
+</html>

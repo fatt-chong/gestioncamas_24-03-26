@@ -1,0 +1,149 @@
+@charset "utf-8";
+.encabezadosprincipal {  color: #000000; background-color: #EAF5FF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; font-weight: bold;}
+
+.encabezadomenu {  font-family: Arial, Helvetica, sans-serif; font-size: 12pt; font-style: normal; font-weight: bold; text-transform: uppercase; color: #2EA69A; text-decoration: none; background-color: #EAF5FF;}
+
+.encabezadostablas {  color: #000000; background-color: #EAF5FF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: normal; font-weight: bold;}
+
+.encabezadoscentro {  color: #000000; background-color: #EAF5FF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: normal;}
+
+.esquinas {  color: #000000; }
+
+.titulocampo {  
+	font-family: verdana, Helvetica, sans-serif; 
+	font-size: 9px; 
+	font-style: normal; 
+	font-weight: bold;
+	text-transform: uppercase; 
+	font-variant: normal; 
+	color: #000000; 
+	text-decoration: none
+}
+
+.titulos {  
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 14pt; 
+	font-style: normal; 
+	text-transform: uppercase; 
+	text-decoration: none;
+}
+
+.titulos_menu {  font-family: Arial, Helvetica, sans-serif; font-size: 9pt; font-style: normal; font-weight: bold; text-transform: uppercase; color: #006699; text-decoration: none}
+
+.fondo_tabla_titulo {  
+font-family: Arial, Helvetica, sans-serif; 
+font-size: 13pt;
+color: #FFF; 
+background-color: #03C; 
+text-decoration: none;
+text-align:left;
+vertical-align:middle;
+height:30px;
+}
+
+.mouse{
+	cursor:pointer;
+	
+}
+
+.casilla_chica{
+	width:10px;
+}
+
+.casilla_media{
+	width:30px;
+}
+
+.casilla_larga{
+	width:60px;
+}
+
+.casilla_mega{
+	width:80px;
+}
+
+.casilla_ultra{
+	width:120px;
+}
+.casilla_Ubber{
+	width:200px;
+}
+.casilla_Hiper{
+	width:320px;
+}
+.casilla_Giga{
+	width:450px;
+}
+
+.titulos_sesion {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-style: normal;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #000;
+	text-decoration: none
+}
+
+.mensaje {
+	color: #F00;
+}
+
+.pantalla {
+	width: 100%;
+	vertical-align:middle;
+	
+}
+
+.tabla_portada {
+	margin-top: 30px;
+}
+
+.portada { 
+	border: 0px outset gray; 
+	width:800px; 
+	height: 512px;
+	margin-top: 50px;
+}
+
+.tabla_portada a  {
+	display: block;
+	text-decoration: none;
+	color: #033
+	font-size: 18px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
+	font-size: 14px;
+	color: #006;
+}
+
+a.enlace {
+	text-decoration: none;
+	display:block;
+}
+a.enlace_medico {text-decoration: none; text-align: left;}
+
+.derechosreservados {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: #006699;
+}
+
+.folio {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #F00;
+	font-weight: bold;	
+}
+
+.cie10 {
+	font-family:Courier New;
+	font-size: 14px;
+	font-weight: bold;	
+}
+
+body {
+	background-image:url(../../../estandar/img/fdo.jpg);
+}
+
+.textochico{ width:2em;}

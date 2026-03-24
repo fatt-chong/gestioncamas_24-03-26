@@ -1,0 +1,134 @@
+@charset "utf-8";
+
+.general{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	padding:0;
+	margin:0;
+	background-color:#DADAEF;
+}
+
+.img_pr{
+	border:0px ridge #9C9C9C;
+	padding-left:1px;
+	padding-bottom:1px;
+
+}
+
+.titulo{ text-align:center;
+        font-family:Verdana, Arial, Helvetica, sans-serif;
+        font-size:17px;
+        }
+
+
+.table_pr{
+	background-color:#DADAEF;
+    border:5px ridge #D3D3D3;
+	margin:center;
+
+}
+
+.table_pr_new{
+	background-color:#DADAEF;
+    border:2px ridge #D3D3D3;
+	margin:center;
+
+}
+
+
+.td_pr{
+	background-color:#DADAEF;
+	border:ridge #D3D3D3;
+	padding:5px 5px 5px;
+	text-align: left;
+	vertical-align: top;
+	width:100px;
+}
+
+.td_pr_new{
+	background-color:#DADAEF;
+	border:ridge #D3D3D3;
+	text-align: left;
+	vertical-align: top;
+}
+
+
+
+.td_pr2{
+	background-color:#DADAEF;
+	border:ridge #D3D3D3;
+	padding:5px 5px 5px;
+	text-align: left;
+	vertical-align: top;
+	
+}
+
+.th_pr{
+	background-image:url(../img/flecha1.gif);
+	background-repeat:repeat;
+	background-position:left;
+	background-color:#DADAEF;
+	border:ridge #D3D3D3;
+	text-align:center;
+	width:100px;
+}
+
+
+
+.th_pr2{
+	background-image:url(../img/flecha1.gif);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-color:#DADAEF;
+/*	border:ridge #D3D3D3;
+*/	text-align:center;
+	width:204px;
+}
+
+.fieldset_pr{
+	width:90%;
+	text-align: left;
+	padding:1px;
+	padding-left:25px;
+	padding-right:25px;
+	text-transform:uppercase;
+	text-decoration:underline;
+
+}
+
+.table_det{
+	width:100%;
+	border:0px;
+	cellspacing:0px;
+	cellpadding:0px;
+	padding:3px;
+/*
+	border:5px solid #D1D1D1;
+	width:100%;
+*/
+}
+
+.fieldset_det2{
+	text-align: left;
+}
+
+.div_det{
+	background-color:#AAAAAA;
+	border:ridge #D3D3D3;
+	height:530px;
+
+}
+
+.div_det1_top{
+	background-color:#AAAAAA;
+	border:ridge #D3D3D3;
+	height:auto;
+
+}
+
+.div_det1_main{
+	background-color:#AAAAAA;
+	border:ridge #D3D3D3;
+	height:375px;
+
+}
