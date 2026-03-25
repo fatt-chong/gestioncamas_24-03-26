@@ -111,6 +111,9 @@ $fecha = date('Y/m/d H:i');
 mysql_select_db('paciente') or die('Cannot select database');
 // Se recupera la ultima cuenta corriente del paciente para mostrarla
 $query_rs_pac = "select max(idctacte) as id from ctacte";
+print_r("<pre>"); print_r("insert ctacte"); print_r("</pre>");
+print_r("<pre>"); print_r($query_rs_pac); print_r("</pre>");
+
 $rs_pac = mysql_query($query_rs_pac) or die(mysql_error());
 $row_rs_pac = mysql_fetch_assoc($rs_pac);
 $totalRowsrspac = mysql_num_rows($rs_pac);
@@ -122,8 +125,11 @@ if ( $row_rs_pac['id'] != null )  {
 $query_rs_pac = "INSERT INTO ctacte (idctacte, paciente_id, fechaapertura, unidadorigen, fechacierre, idpaciente, conveniopago)
 						VALUES ( $nroctacte, $rut_paciente, '$fecha', 10366, '1900/01/01', $id_paciente, $conveniopago )";
 
+print_r("<pre>"); print_r("insert ctacte"); print_r("</pre>");
+print_r("<pre>"); print_r($query_rs_pac); print_r("</pre>");
 
-$rs_pac = mysql_query($query_rs_pac) or die(mysql_error()."<br>".$query_rs_pac);
+// comentado 25-03-26
+// $rs_pac = mysql_query($query_rs_pac) or die(mysql_error()."<br>".$query_rs_pac);
 
 
 $cta_cte = $nroctacte;
@@ -273,14 +279,19 @@ echo "</table>";
 //	echo $sql;
 	mysql_select_db('camas') or die('Cannot select database');
 
-	$resultado_1 = mysql_query( $sql ) or die(mysql_error());
+	// comentado 25-03-26
+	// $resultado_1 = mysql_query( $sql ) or die(mysql_error());
+	print_r("<pre>"); print_r("insert altaprecoz"); print_r("</pre>");
+	print_r("<pre>"); print_r($sql); print_r("</pre>");
 
 	mysql_select_db('paciente') or die('Cannot select database');
 
-	$resultado_2 = mysql_query( "UPDATE paciente SET
-	hospitalizado   = '$hospitalizado'
-	WHERE id = $id_paciente "  ) or die(mysql_error());
-
+	//comentado 25-03-26
+	// $resultado_2 = mysql_query( "UPDATE paciente SET
+	// hospitalizado   = '$hospitalizado'
+	// WHERE id = $id_paciente "  ) or die(mysql_error());
+	print_r("<pre>"); print_r("update paciente"); print_r("</pre>");
+	print_r("<pre>"); print_r("UPDATE paciente SET hospitalizado   = '$hospitalizado'"); print_r("</pre>");
 /*
 	echo "<p>servicio : ".$servicio."</p>";
 	echo "<p>desc_servicio : ".$desc_servicio."</p>";

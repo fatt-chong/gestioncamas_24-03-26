@@ -136,8 +136,8 @@ while($l_pauge = mysql_fetch_array($query)){
 	$i++;
 }
 
-print_r("<pre>"); print_r("*** auge ***"); print_r("</pre>");
-print_r("<pre>"); print_r($pauge); print_r("</pre>");
+// print_r("<pre>"); print_r("*** auge ***"); print_r("</pre>");
+// print_r("<pre>"); print_r($pauge); print_r("</pre>");
 
 $sql = "SELECT * FROM medicos order by medico";
 mysql_select_db('camas') or die('Cannot select database');
@@ -150,10 +150,10 @@ while($l_medicos = mysql_fetch_array($query)){
 	$i++;
 }
 
-print_r("<pre>"); print_r("*** medicos ***"); print_r("</pre>");
-print_r("<pre>"); print_r($id_medicos); print_r("</pre>");
-print_r("<pre>"); print_r($medicos); print_r("</pre>");
-print_r("<pre>"); print_r("*** medicos ***"); print_r("</pre>");
+// print_r("<pre>"); print_r("*** medicos ***"); print_r("</pre>");
+// print_r("<pre>"); print_r($id_medicos); print_r("</pre>");
+// print_r("<pre>"); print_r($medicos); print_r("</pre>");
+// print_r("<pre>"); print_r("*** medicos ***"); print_r("</pre>");
 
 $sql = "SELECT * FROM sscc WHERE id < 100";
 mysql_select_db('camas') or die('Cannot select database');
@@ -166,9 +166,9 @@ while($l_servicios = mysql_fetch_array($query)){
 	$i++;
 }
 
-print_r("<pre>"); print_r("*** procedencia ***"); print_r("</pre>");
+// print_r("<pre>"); print_r("*** procedencia ***"); print_r("</pre>");
 // print_r("<pre>"); print_r($id_servicios); print_r("</pre>");
-print_r("<pre>"); print_r($servicios); print_r("</pre>");
+// print_r("<pre>"); print_r($servicios); print_r("</pre>");
 
 $sql = "SELECT * FROM paciente where id = '".$doc_paciente."'";
 
