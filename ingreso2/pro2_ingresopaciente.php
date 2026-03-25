@@ -44,6 +44,21 @@ $movil_t= $_GET['movil_t'];
 $movil_n= $_GET['movil_n'];
 $movil_ma= $_GET['movil_ma'];
 
+// print_r("<pre>cod_auge"); print_r($diagnostico1); print_r("</pre>");
+// print_r("<pre>cod_auge"); print_r($diagnostico2); print_r("</pre>");
+
+// print_r("<pre>cod_auge"); print_r($cod_auge); print_r("</pre>");
+
+// print_r("<pre>cod_medico"); print_r($cod_medico); print_r("</pre>");
+// print_r("<pre>medico"); print_r($medico); print_r("</pre>");
+
+
+// print_r("<pre>movil_m"); print_r($movil_m); print_r("</pre>");
+// print_r("<pre>movil_t"); print_r($movil_t); print_r("</pre>");
+// print_r("<pre>movil_n"); print_r($movil_n); print_r("</pre>");
+// print_r("<pre>movil_ma"); print_r($movil_ma); print_r("</pre>");
+
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -101,6 +116,12 @@ $procedencia = $l_servicios['servicio'];
 $cod_sscc_desde = $l_servicios['id_rau'];
 
 $hospitalizado = $fecha_hospitalizacion." ".$hora_ingreso;
+
+print_r("<pre>hospitalizado"); print_r($hospitalizado); print_r("</pre>");
+print_r("<pre>hora_ingreso"); print_r($hora_ingreso); print_r("</pre>");
+print_r("<pre>fecha_hospitalizacion"); print_r($fecha_hospitalizacion); print_r("</pre>");
+
+die();
 
 if ($rut_paciente == '') { $rut_paciente = 0; }
 
