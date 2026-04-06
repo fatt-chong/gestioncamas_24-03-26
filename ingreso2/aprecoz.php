@@ -162,10 +162,17 @@ $desc_servicio = "HOSP. DOMICILIARIA";
 								?> <input style="font-size:15px; font-family:Verdana, Arial, Helvetica, sans-serif"type="Button" value="Reporte Diario Excel" onClick="window.open('<? echo"XLS/generaXLS_domiciliaria.php"; ?>'); parent.GB_hide(); " > <?
 							echo"</td>";
 						echo"</tr>";
+						echo "<tr>";
+    echo "<td colspan='4' style='padding:10px;'>";
+        echo "<input type='text' id='buscarPaciente' placeholder='Buscar paciente...' 
+            style='font-size:14px; padding:5px; width:100%; box-sizing:border-box;' />";
+    echo "</td>";
+echo "</tr>";
 					echo"</table>";
 				echo"</fieldset>";
 			echo"</td>";
 		echo"</tr>";
+		
 	echo"</table>";
 
 
@@ -377,13 +384,14 @@ $query = mysql_query("SELECT * FROM altaprecoz order by ".$queorden ) or die(mys
 				if ($esta_ficha == 1) { $logo_cama = $logo_cama.'-f.gif'; }
 				else { $logo_cama = $logo_cama.'.gif'; }
 
-				echo"<tr><td class='td_sscc'";
-				
-				?>
-				onmouseover="myShow('<? echo $inf_paciente; ?>', this)" onmouseout="myHint.hide()"
-				<?
-			
-				echo"><a href='altapaciente.php?id_cama=$id_cama&tipo_atencion=XXX' ><img class='img_sscc' src='img/".$logo_cama."' /></a></td></tr>";
+echo "<tr>";
+echo "<td class='td_sscc' data-paciente='".htmlspecialchars($camas['nom_paciente'], ENT_QUOTES)."' 
+      onmouseover=\"myShow('".htmlspecialchars($inf_paciente, ENT_QUOTES)."', this)\" 
+      onmouseout=\"myHint.hide()\">";
+echo "<a href='altapaciente.php?id_cama=$id_cama&tipo_atencion=XXX' >";
+echo "<img class='img_sscc' src='img/".$logo_cama."' />";
+echo "</a></td>";
+echo "</tr>";
 				$totalpac ++;
 				
 	}
@@ -500,7 +508,23 @@ document.midiv.visibility='hide';
 </SCRIPT>
 
 
-
+<script type="text/javascript">
+(function(){
+    var input = document.getElementById('buscarPaciente');
+    input.onkeyup = function() {
+        var filtro = input.value.toLowerCase();
+        var filas = document.getElementsByClassName('td_sscc');
+        for (var i = 0; i < filas.length; i++) {
+            var nombre = filas[i].getAttribute('data-paciente').toLowerCase();
+            if (nombre.indexOf(filtro) > -1) {
+                filas[i].style.display = '';
+            } else {
+                filas[i].style.display = 'none';
+            }
+        }
+    };
+})();
+</script>
 
 </body>
 </html>
