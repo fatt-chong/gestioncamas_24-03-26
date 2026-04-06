@@ -44,21 +44,6 @@ $movil_t= $_GET['movil_t'];
 $movil_n= $_GET['movil_n'];
 $movil_ma= $_GET['movil_ma'];
 
-// print_r("<pre>cod_auge"); print_r($diagnostico1); print_r("</pre>");
-// print_r("<pre>cod_auge"); print_r($diagnostico2); print_r("</pre>");
-
-// print_r("<pre>cod_auge"); print_r($cod_auge); print_r("</pre>");
-
-// print_r("<pre>cod_medico"); print_r($cod_medico); print_r("</pre>");
-// print_r("<pre>medico"); print_r($medico); print_r("</pre>");
-
-
-// print_r("<pre>movil_m"); print_r($movil_m); print_r("</pre>");
-// print_r("<pre>movil_t"); print_r($movil_t); print_r("</pre>");
-// print_r("<pre>movil_n"); print_r($movil_n); print_r("</pre>");
-// print_r("<pre>movil_ma"); print_r($movil_ma); print_r("</pre>");
-
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -117,12 +102,6 @@ $cod_sscc_desde = $l_servicios['id_rau'];
 
 $hospitalizado = $fecha_hospitalizacion." ".$hora_ingreso;
 
-print_r("<pre>hospitalizado"); print_r($hospitalizado); print_r("</pre>");
-print_r("<pre>hora_ingreso"); print_r($hora_ingreso); print_r("</pre>");
-print_r("<pre>fecha_hospitalizacion"); print_r($fecha_hospitalizacion); print_r("</pre>");
-
-die();
-
 if ($rut_paciente == '') { $rut_paciente = 0; }
 
 
@@ -132,9 +111,6 @@ $fecha = date('Y/m/d H:i');
 mysql_select_db('paciente') or die('Cannot select database');
 // Se recupera la ultima cuenta corriente del paciente para mostrarla
 $query_rs_pac = "select max(idctacte) as id from ctacte";
-print_r("<pre>"); print_r("insert ctacte"); print_r("</pre>");
-print_r("<pre>"); print_r($query_rs_pac); print_r("</pre>");
-
 $rs_pac = mysql_query($query_rs_pac) or die(mysql_error());
 $row_rs_pac = mysql_fetch_assoc($rs_pac);
 $totalRowsrspac = mysql_num_rows($rs_pac);
@@ -146,11 +122,8 @@ if ( $row_rs_pac['id'] != null )  {
 $query_rs_pac = "INSERT INTO ctacte (idctacte, paciente_id, fechaapertura, unidadorigen, fechacierre, idpaciente, conveniopago)
 						VALUES ( $nroctacte, $rut_paciente, '$fecha', 10366, '1900/01/01', $id_paciente, $conveniopago )";
 
-print_r("<pre>"); print_r("insert ctacte"); print_r("</pre>");
-print_r("<pre>"); print_r($query_rs_pac); print_r("</pre>");
 
-// comentado 25-03-26
-// $rs_pac = mysql_query($query_rs_pac) or die(mysql_error()."<br>".$query_rs_pac);
+$rs_pac = mysql_query($query_rs_pac) or die(mysql_error()."<br>".$query_rs_pac);
 
 
 $cta_cte = $nroctacte;
@@ -300,19 +273,14 @@ echo "</table>";
 //	echo $sql;
 	mysql_select_db('camas') or die('Cannot select database');
 
-	// comentado 25-03-26
-	// $resultado_1 = mysql_query( $sql ) or die(mysql_error());
-	print_r("<pre>"); print_r("insert altaprecoz"); print_r("</pre>");
-	print_r("<pre>"); print_r($sql); print_r("</pre>");
+	$resultado_1 = mysql_query( $sql ) or die(mysql_error());
 
 	mysql_select_db('paciente') or die('Cannot select database');
 
-	//comentado 25-03-26
-	// $resultado_2 = mysql_query( "UPDATE paciente SET
-	// hospitalizado   = '$hospitalizado'
-	// WHERE id = $id_paciente "  ) or die(mysql_error());
-	print_r("<pre>"); print_r("update paciente"); print_r("</pre>");
-	print_r("<pre>"); print_r("UPDATE paciente SET hospitalizado   = '$hospitalizado'"); print_r("</pre>");
+	$resultado_2 = mysql_query( "UPDATE paciente SET
+	hospitalizado   = '$hospitalizado'
+	WHERE id = $id_paciente "  ) or die(mysql_error());
+
 /*
 	echo "<p>servicio : ".$servicio."</p>";
 	echo "<p>desc_servicio : ".$desc_servicio."</p>";
