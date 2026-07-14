@@ -227,7 +227,8 @@ camas.altaprecoz.fecha_ingreso,
 camas.altaprecoz.hora_ingreso,
 camas.altaprecoz.fecha_egreso,
 camas.altaprecoz.hora_egreso,
-paciente.paciente.direccion
+paciente.paciente.direccion,
+camas.altaprecoz.alt_id_hosp_dom
 FROM
 camas.altaprecoz
 INNER JOIN paciente.paciente ON camas.altaprecoz.id_paciente = paciente.paciente.id
@@ -240,6 +241,8 @@ camas.altaprecoz.id = $id_cama";
 	$query = mysql_query($sql) or die(mysql_error());
 
     $paciente = mysql_fetch_array($query);
+
+	//print_r("<pre>"); print_r($paciente); print_r("<pre>");
 
 ?>
 
@@ -254,6 +257,8 @@ camas.altaprecoz.id = $id_cama";
 if ($paciente)
 
 {
+
+	$registroOrigen = "";
 
 	$cama = $paciente['cama'];
 	$sala = $paciente['sala'];
@@ -272,6 +277,71 @@ if ($paciente)
 	$categorizacion_riesgo = $paciente['categorizacion_riesgo'];
 	$categorizacion_dependencia = $paciente['categorizacion_dependencia'];
 	$categorizacion = $categorizacion_riesgo.''.$categorizacion_dependencia;
+
+	//17-07-26
+	$hospDomAltPre_id = $paciente["alt_id_hosp_dom"] ? $paciente["alt_id_hosp_dom"] : 0;
+
+	if($hospDomAltPre_id != 0){
+	// Realizar la consulta a la tabla hospitalizacion_domiciliaria.alta_precoz
+		mysql_select_db('hospitalizacion_domiciliaria') or die('Cannot select database');
+		
+		$sql_hosp_dom = "SELECT
+			alta_precoz.alt_id, 
+			alta_precoz.registroOrigen, 
+			alta_precoz.fundamento, 
+			alta_precoz.alt_dp_procedencia, 
+			procedencia.descripcionProcedencia
+		FROM
+			alta_precoz
+			INNER JOIN
+			procedencia
+			ON 
+				alta_precoz.alt_dp_procedencia = procedencia.id
+		WHERE
+			alta_precoz.alt_id = $hospDomAltPre_id";
+		
+		$result_hosp_dom = mysql_query($sql_hosp_dom) or die(mysql_error());
+		$datos_hosp_dom = mysql_fetch_array($result_hosp_dom);
+		
+		// Ahora puedes usar los datos obtenidos
+		if($datos_hosp_dom) {
+			$alt_id = $datos_hosp_dom['alt_id'];
+			$registroOrigen = $datos_hosp_dom['registroOrigen'];
+			
+			print_r("<pre>ACA"); print_r($registroOrigen); print_r("</pre>");
+
+			if(empty($registroOrigen)) {
+				$registroOrigen = "HOSPDOM"; // o el valor que quieras por defecto
+			} else {
+				// Solo aplicar el switch si hay valor
+				switch($registroOrigen){
+					case "rce":
+						$registroOrigen = "RCEv2_1";
+						break;
+					default:
+						$registroOrigen = "HOSPDOM";
+						break;
+				}
+				$registroOrigen = strtoupper($registroOrigen);
+			}
+			
+			if($registroOrigen){
+				$registroOrigenVisible = "eneabled";
+			}else{
+				$registroOrigenVisible = "hidden";
+			}
+			
+			$fundamento = $datos_hosp_dom['fundamento'];
+			$alt_dp_procedencia = $datos_hosp_dom['alt_dp_procedencia'];
+			$descripcionProcedencia = $datos_hosp_dom['descripcionProcedencia'];
+			
+			$paciente['procedencia'] = $descripcionProcedencia;
+			$paciente['diagnostico1'] = $fundamento ? $fundamento : "Sin diagnostico";
+			// Aquí puedes mostrar o usar los datos como necesites
+			// echo "alt_id: $alt_id, registroOrigen: $registroOrigen, fundamento: $fundamento";
+		}
+	}
+	//17-07-26
 
 //echo "Que movil ".$quemovil;
 //echo "</br>Que orden ".$queorden;
@@ -384,6 +454,9 @@ if ($paciente)
                     <td style="font-size:14px"> <input size="9" type="text" name="pfecha" value="<?php echo cambiarFormatoFecha($paciente['fecha_ingreso']); ?>" readonly="readonly" />
 &nbsp;&nbsp; Hora <input size="4" type="text" name="hora_ingreso" value="<?php echo substr($paciente['hora_ingreso'],0,5); ?>" readonly="readonly" />
 &nbsp;&nbsp; Cta-Cte <input size="8" type="text" name="cta_cte" value="<?php echo $cta_cte; ?>" readonly="readonly" />
+<?php if($registroOrigenVisible == "eneabled"){?>
+&nbsp;&nbsp; Sistema <input size="8" type="text" name="sistema" value="<?php echo $registroOrigen; ?>" readonly="readonly" />
+<?php } ?>
 &nbsp;&nbsp; <?php if ($servicio == 6 or $servicio == 7 or $servicio == 10 or $servicio == 11) { ?>
 Tipo Cama <input size="33" type="text" name="tipo_cama" value="<? echo $d_tipo_1." ".$d_tipo_2; ?>" readonly="readonly" /> <? } ?> 
                      </td>
