@@ -96,7 +96,7 @@ function cambiarFormatoFecha2($fecha){
     return $anio."-".$mes."-".$dia; 
 }
 //CONEXIONES A BD
-$a=mysql_connect ('10.6.21.29','usuario','hospital');
+$a=mysql_connect ('10.6.21.26','usuario','hospital');
 mysql_select_db('epicrisis',$a) or die('Cannot select database');
 mysql_query("SET NAMES 'utf8'");
 

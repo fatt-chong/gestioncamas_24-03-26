@@ -60,7 +60,7 @@ if ($ficha_paciente == '') { $ficha_paciente = 0; }
 
 $fecha_hospitalizacion = cambiarFormatoFecha2($fecha_ingreso);
 
-mysql_connect ('10.6.21.29','usuario','hospital');
+mysql_connect ('10.6.21.26','usuario','hospital');
 
 $sql = "DELETE FROM at_altaprecoz where fecha = '".$fecha_hoy."'";
 

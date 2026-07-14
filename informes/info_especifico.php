@@ -172,7 +172,7 @@ $fecha_hasta_proceso = cambiarFormatoFecha($fecha_hasta);
 	
 
 	<?
-	mysql_connect ('10.6.21.29','usuario','hospital');
+	mysql_connect ('10.6.21.26','usuario','hospital');
 	
     switch ($tipo_categorizacion) {
     case 1:

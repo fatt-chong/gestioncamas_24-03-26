@@ -12,7 +12,7 @@ $permisos = $_SESSION['permiso'];
 
 
 include ('funciones/funciones.php');
-mysql_connect ('10.6.21.29','usuario','hospital');
+mysql_connect ('10.6.21.26','usuario','hospital');
 mysql_select_db('rau') or die('Cannot select database');
 mysql_query("SET NAMES 'utf8'");
 

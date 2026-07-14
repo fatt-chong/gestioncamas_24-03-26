@@ -73,7 +73,7 @@ if ( $_SESSION['MM_Username'] == null ) {
 							<?
                             include "../funciones/funciones.php";	
      
-                            mysql_connect ('10.6.21.29','usuario','hospital');
+                            mysql_connect ('10.6.21.26','usuario','hospital');
                             mysql_select_db('camas') or die('Cannot select database');
                  			if($buscador){
 								$condicion = " and nom_paciente like '%$buscador%' ";

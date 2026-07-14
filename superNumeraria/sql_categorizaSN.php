@@ -18,7 +18,7 @@ if ( $_SESSION['MM_Username'] == null ) {
 include "../funciones/funciones.php";
 
 $permisos = $_SESSION['permiso'];
-$dbhost = '10.6.21.29';
+$dbhost = '10.6.21.26';
 
 $cod_servicio = $_GET['cod_servicio']; 
 $desc_servicio = $_GET['desc_servicio']; 

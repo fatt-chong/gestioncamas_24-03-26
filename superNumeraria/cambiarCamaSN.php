@@ -6,7 +6,7 @@ if( $_SESSION['MM_Username'] == null ) {
 }
 //date_default_timezone_set('America/Santiago');
 
-mysql_connect ('10.6.21.29','usuario','hospital');
+mysql_connect ('10.6.21.26','usuario','hospital');
 mysql_select_db('camas') or die('Cannot select database');
 mysql_query("SET NAMES 'utf8'");
 

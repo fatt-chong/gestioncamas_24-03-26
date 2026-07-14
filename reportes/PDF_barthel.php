@@ -68,7 +68,7 @@ $fechaBusca2 = $fechahasta." 23:59:59";
 
 //$fechainicio = cambiarFormatoFecha2($fechaD1);
 //$fechahasta  = cambiarFormatoFecha2($fechaH1);
-	mysql_connect ('10.6.21.29','usuario','hospital');
+	mysql_connect ('10.6.21.26','usuario','hospital');
 	mysql_select_db('camas') or die('Cannot select database'); 
 
 /*
