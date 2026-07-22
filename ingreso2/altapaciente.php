@@ -281,34 +281,55 @@ if ($paciente)
 	//17-07-26
 	$hospDomAltPre_id = $paciente["alt_id_hosp_dom"] ? $paciente["alt_id_hosp_dom"] : 0;
 
+	//22-07-26
+	$tituloAxuDescripcionMostrar = "";
+	//22-07-26
+
 	if($hospDomAltPre_id != 0){
 	// Realizar la consulta a la tabla hospitalizacion_domiciliaria.alta_precoz
 		mysql_select_db('hospitalizacion_domiciliaria') or die('Cannot select database');
 		
 		$sql_hosp_dom = "SELECT
-			alta_precoz.alt_id, 
-			alta_precoz.registroOrigen, 
-			alta_precoz.fundamento, 
-			alta_precoz.alt_dp_procedencia, 
-			procedencia.descripcionProcedencia
-		FROM
-			alta_precoz
-			INNER JOIN
-			procedencia
-			ON 
-				alta_precoz.alt_dp_procedencia = procedencia.id
-		WHERE
-			alta_precoz.alt_id = $hospDomAltPre_id";
+							alta_precoz.alt_id, 
+							alta_precoz.registroOrigen, 
+							alta_precoz.fundamento, 
+							alta_precoz.alt_dp_procedencia, 
+							procedencia.descripcionProcedencia,
+							-- Campos individuales para depuración
+							sscc.servicio AS sscc_servicio,
+							local.LOCdescripcion AS local_descripcion,
+							-- Campo unificado
+							CASE 
+								WHEN alta_precoz.alt_dp_procedencia = 3 THEN sscc.servicio
+								WHEN alta_precoz.alt_dp_procedencia = 2 THEN local.LOCdescripcion
+								ELSE ''
+							END AS descripcionAuxiliar
+						FROM
+							alta_precoz
+						INNER JOIN
+							procedencia
+							ON alta_precoz.alt_dp_procedencia = procedencia.id
+						LEFT JOIN
+							camas.sscc
+							ON alta_precoz.alt_dp_procedencia_sscc = sscc.id
+							AND alta_precoz.alt_dp_procedencia = 3
+						LEFT JOIN
+							agenda.local
+							ON alta_precoz.alt_dp_procedencia_local = local.LOCcodigo
+							AND alta_precoz.alt_dp_procedencia = 2
+						WHERE alta_precoz.alt_id = $hospDomAltPre_id"; //
 		
 		$result_hosp_dom = mysql_query($sql_hosp_dom) or die(mysql_error());
 		$datos_hosp_dom = mysql_fetch_array($result_hosp_dom);
 		
+		// print_r("<pre>"); print_r($datos_hosp_dom); print_r("</pre>");
+
 		// Ahora puedes usar los datos obtenidos
 		if($datos_hosp_dom) {
 			$alt_id = $datos_hosp_dom['alt_id'];
 			$registroOrigen = $datos_hosp_dom['registroOrigen'];
 			
-			print_r("<pre>ACA"); print_r($registroOrigen); print_r("</pre>");
+			// print_r("<pre>ACA"); print_r($registroOrigen); print_r("</pre>");
 
 			if(empty($registroOrigen)) {
 				$registroOrigen = "HOSPDOM"; // o el valor que quieras por defecto
@@ -324,6 +345,17 @@ if ($paciente)
 				}
 				$registroOrigen = strtoupper($registroOrigen);
 			}
+			
+			//22-07-26 
+			switch($datos_hosp_dom["alt_dp_procedencia"]){
+				case "2":
+					$tituloAxuDescripcionMostrar = "Local";
+				break;
+				case "3":
+					$tituloAxuDescripcionMostrar = "Servicio";
+				break;
+			}
+			//22-07-26
 			
 			if($registroOrigen){
 				$registroOrigenVisible = "eneabled";
@@ -457,6 +489,15 @@ if ($paciente)
 <?php if($registroOrigenVisible == "eneabled"){?>
 &nbsp;&nbsp; Sistema <input size="8" type="text" name="sistema" value="<?php echo $registroOrigen; ?>" readonly="readonly" />
 <?php } ?>
+<?php
+	//22-07-26 
+	if($datos_hosp_dom["alt_dp_procedencia"] == 2 || $datos_hosp_dom["alt_dp_procedencia"] == 3){ //si la procedencia es secundario o terciario
+?>
+		&nbsp;&nbsp; <?php echo $tituloAxuDescripcionMostrar; ?> <input size="8" type="text" name="sistema" value="<?php echo $datos_hosp_dom["descripcionAuxiliar"] ? $datos_hosp_dom["descripcionAuxiliar"] : "Sin Descripción"; ?>" readonly="readonly" />
+<?php
+	}
+	//22-07-26
+?>
 &nbsp;&nbsp; <?php if ($servicio == 6 or $servicio == 7 or $servicio == 10 or $servicio == 11) { ?>
 Tipo Cama <input size="33" type="text" name="tipo_cama" value="<? echo $d_tipo_1." ".$d_tipo_2; ?>" readonly="readonly" /> <? } ?> 
                      </td>
