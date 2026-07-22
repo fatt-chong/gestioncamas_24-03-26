@@ -499,20 +499,24 @@ Tipo Cama <input size="33" type="text" name="tipo_cama" value="<? echo $d_tipo_1
                     <td>Medico Tratante</td>
 					<td><input size="55" type="text" name="pmedico" value="<?php echo $paciente['medico']; ?>" readonly="readonly" /> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Procedencia <input size="25" type="text" name="pprocedencia" value="<?php echo $paciente['procedencia']; ?>" readonly="readonly" /> </td>
-                
-		<?php
-			//22-07-26 
-			if($datos_hosp_dom["alt_dp_procedencia"] == 2 || $datos_hosp_dom["alt_dp_procedencia"] == 3){ //si la procedencia es secundario o terciario
-		?>
-				<td>&nbsp;</td>
-				<td><?php echo $tituloAxuDescripcionMostrar; ?></td>
-				<td><input size="15" type="text" name="sistema" value="<?php echo $datos_hosp_dom["descripcionAuxiliar"] ? $datos_hosp_dom["descripcionAuxiliar"] : "Sin Descripción"; ?>" readonly="readonly" /></td>
-		<?php
-			}
-			//22-07-26
-		?>
-				</tr>
-                <tr>
+                </tr>
+
+				<!-- 22-07-26 -->
+
+				<?php
+					if($datos_hosp_dom["alt_dp_procedencia"] == 2 || $datos_hosp_dom["alt_dp_procedencia"] == 3){ //si la procedencia es secundario o terciario
+				?>
+						<tr>
+							<td width="10px"></td>                
+							<td><?php echo $tituloAxuDescripcionMostrar; ?></td>
+							<td><input size="100" type="text" name="hospDomProcedencia" value="<?php echo $datos_hosp_dom["descripcionAuxiliar"] ? $datos_hosp_dom["descripcionAuxiliar"] : "Sin Descripción"; ?>" readonly="readonly" /></td>
+						</tr>
+				<?php
+					} 
+				?>
+				<!-- 22-07-26 -->
+
+				<tr>
                     <td></td>
                     <td>Pre-Diagnostico</td>
                     <td ><input size="101" type="text" name="pdiagnostico1" value="<?php echo $paciente['diagnostico1']; ?>" readonly="readonly" /></td>
