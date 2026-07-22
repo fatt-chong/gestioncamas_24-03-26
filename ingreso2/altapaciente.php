@@ -489,15 +489,7 @@ if ($paciente)
 <?php if($registroOrigenVisible == "eneabled"){?>
 &nbsp;&nbsp; Sistema <input size="8" type="text" name="sistema" value="<?php echo $registroOrigen; ?>" readonly="readonly" />
 <?php } ?>
-<?php
-	//22-07-26 
-	if($datos_hosp_dom["alt_dp_procedencia"] == 2 || $datos_hosp_dom["alt_dp_procedencia"] == 3){ //si la procedencia es secundario o terciario
-?>
-		&nbsp;&nbsp; <?php echo $tituloAxuDescripcionMostrar; ?> <input size="8" type="text" name="sistema" value="<?php echo $datos_hosp_dom["descripcionAuxiliar"] ? $datos_hosp_dom["descripcionAuxiliar"] : "Sin Descripción"; ?>" readonly="readonly" />
-<?php
-	}
-	//22-07-26
-?>
+
 &nbsp;&nbsp; <?php if ($servicio == 6 or $servicio == 7 or $servicio == 10 or $servicio == 11) { ?>
 Tipo Cama <input size="33" type="text" name="tipo_cama" value="<? echo $d_tipo_1." ".$d_tipo_2; ?>" readonly="readonly" /> <? } ?> 
                      </td>
@@ -507,7 +499,19 @@ Tipo Cama <input size="33" type="text" name="tipo_cama" value="<? echo $d_tipo_1
                     <td>Medico Tratante</td>
 					<td><input size="55" type="text" name="pmedico" value="<?php echo $paciente['medico']; ?>" readonly="readonly" /> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Procedencia <input size="25" type="text" name="pprocedencia" value="<?php echo $paciente['procedencia']; ?>" readonly="readonly" /> </td>
-                </tr>
+                
+		<?php
+			//22-07-26 
+			if($datos_hosp_dom["alt_dp_procedencia"] == 2 || $datos_hosp_dom["alt_dp_procedencia"] == 3){ //si la procedencia es secundario o terciario
+		?>
+				<td>&nbsp;</td>
+				<td><?php echo $tituloAxuDescripcionMostrar; ?></td>
+				<td><input size="15" type="text" name="sistema" value="<?php echo $datos_hosp_dom["descripcionAuxiliar"] ? $datos_hosp_dom["descripcionAuxiliar"] : "Sin Descripción"; ?>" readonly="readonly" /></td>
+		<?php
+			}
+			//22-07-26
+		?>
+				</tr>
                 <tr>
                     <td></td>
                     <td>Pre-Diagnostico</td>
